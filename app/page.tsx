@@ -1,5 +1,11 @@
 import HeroSection from "./components/herosection";
+import { Footer } from "./components/footer";
 
 export default function Home() {
-  return <HeroSection />;
+  return (
+    <main>
+      <HeroSection />
+      <Footer />
+    </main>
+  );
 }

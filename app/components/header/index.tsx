@@ -8,25 +8,25 @@ const navigation = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/80 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/80">
+    <header id="top" className="sticky top-0 z-50 border-b border-purple-300/10 bg-[#08070a]/85 text-white backdrop-blur-xl">
       <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
-          className="group inline-flex items-center gap-2 font-semibold tracking-tight text-zinc-950 dark:text-white"
+          className="group inline-flex items-center gap-3 font-semibold tracking-tight text-white"
           aria-label="Portfolio home"
         >
-          <span className="grid size-9 place-items-center rounded-full bg-zinc-950 text-sm text-white transition-transform group-hover:-rotate-6 dark:bg-white dark:text-zinc-950">
-            K
+          <span className="grid size-9 rotate-3 place-items-center border border-purple-300/50 bg-purple-500/15 font-mono text-sm text-purple-200 transition-transform group-hover:-rotate-6">
+            K.
           </span>
           <span>Kumud Waykole</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 text-sm font-medium text-zinc-600 md:flex dark:text-zinc-300" aria-label="Main navigation">
+        <nav className="hidden items-center gap-8 font-mono text-[11px] font-medium uppercase tracking-[.18em] text-zinc-400 md:flex" aria-label="Main navigation">
           {navigation.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="transition-colors hover:text-zinc-950 dark:hover:text-white"
+              className="transition-colors hover:text-purple-300"
             >
               {item.label}
             </Link>
@@ -35,7 +35,7 @@ export function Header() {
 
         <Link
           href="/#contact"
-          className="hidden rounded-full bg-zinc-950 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-zinc-700 md:inline-flex dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+          className="hidden border border-purple-300/40 bg-purple-500/10 px-5 py-2.5 text-sm font-semibold text-purple-100 transition hover:bg-purple-500 hover:text-white md:inline-flex"
         >
           Let&apos;s talk
         </Link>
