@@ -22,7 +22,7 @@ export function Footer() {
           </div>
           <div className="group relative h-74 overflow-hidden border border-purple-300/35 bg-black transition-colors duration-300 hover:border-purple-300/55 sm:h-90">
             <div className="pointer-events-none absolute inset-x-0 top-6 z-10 text-center font-mono text-sm font-semibold tracking-wide text-zinc-100 sm:top-5 sm:text-xl">
-              <p className="italic">Let's connect</p>
+              <p className="italic">Let&apos;s connect</p>
             </div>
             <Globe className="inset-x-0 bottom-auto top-14 w-[125%] max-w-150 -translate-x-[10%] sm:top-16 sm:w-full sm:translate-x-0" />
             <div className="pointer-events-none absolute inset-x-[8%] bottom-[-35%] aspect-square rounded-full bg-[radial-gradient(circle_at_50%_38%,rgba(192,132,252,.16),rgba(126,34,206,.055)_38%,transparent_67%)] opacity-75 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true" />
