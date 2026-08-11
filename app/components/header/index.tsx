@@ -15,13 +15,13 @@ export function Header() {
           className="group inline-flex items-center gap-3 font-semibold tracking-tight text-white"
           aria-label="Portfolio home"
         >
-          <span className="grid size-9 rotate-3 place-items-center border border-purple-300/50 bg-purple-500/15 font-mono text-sm text-purple-200 transition-transform group-hover:-rotate-6">
+          <span className="grid size-9 rotate-3 place-items-center border border-purple-300/50 bg-purple-500/15 text-sm text-purple-200 transition-transform group-hover:-rotate-6">
             K.
           </span>
           <span>Kumud Waykole</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 font-mono text-[11px] font-medium uppercase tracking-[.18em] text-zinc-400 md:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-8 text-[11px] font-medium uppercase tracking-[.18em] text-zinc-400 md:flex" aria-label="Main navigation">
           {navigation.map((item) => (
             <Link
               key={item.href}

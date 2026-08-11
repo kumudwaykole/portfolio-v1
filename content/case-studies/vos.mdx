@@ -1,0 +1,79 @@
+{/*
+  DRAFT SCAFFOLD — replace the placeholder values below with the real project
+  details (client, year, stats, review) and write the body sections.
+  While `draft: true`, the /work card and case study page show a "writing"
+  notice instead of pretending the write-up is finished.
+
+  IMAGES — every `src` points at a file in `/public/images`, addressed as
+  `/images/<filename>`. Drop screenshots into that folder and swap the `src`
+  values. `<Shot>` crops to the `ratio` you give it (default 4/3); pass
+  `fit="contain"` for full UI screenshots you don't want cropped.
+*/}
+
+export const metadata = {
+  slug: "vos",
+  order: 3,
+  title: "Vaault Of Scents",
+  subtitle: "A fragrance storefront built for conversion.",
+  description:
+    "A direct-to-consumer fragrance storefront with a Razorpay checkout, built on Next.js for fast product browsing and a short path to purchase.",
+  client: "Vaault Of Scents",
+  year: "2025",
+  role: "Full Stack",
+  tags: ["Next.js", "Razorpay", "E-commerce"],
+  heroImage: "/images/booktkit.PNG",
+  coverImage: "/images/booktkit.PNG",
+  stats: [
+    { label: "Duration", value: "—" },
+    { label: "Team size", value: "—" },
+    { label: "Payments", value: "Razorpay" },
+    { label: "Stack", value: "Next.js" },
+  ],
+  review: {
+    initials: "",
+    name: "",
+    role: "",
+    text: "",
+  },
+  draft: true,
+};
+
+<Section heading="Overview">
+
+Write the project overview here — what the store sells, who it serves, and what
+you were responsible for.
+
+</Section>
+
+<Gallery layout="offset">
+  <Shot src="/images/booktkit.PNG" alt="Storefront homepage" ratio="3/4" />
+  <Shot src="/images/booktkit.PNG" alt="Product detail page" ratio="4/3" />
+</Gallery>
+
+<Section heading="The Challenge" layout="split">
+
+Describe the problem the build had to solve.
+
+- First constraint.
+- Second constraint.
+- Third constraint.
+
+</Section>
+
+<Section heading="Approach" layout="split">
+
+Describe the architecture and the decisions behind it — catalogue structure,
+checkout flow, and how the Razorpay integration was wired up.
+
+</Section>
+
+<Gallery layout="duo">
+  <Shot src="/images/booktkit.PNG" alt="Cart and checkout" ratio="4/3" />
+  <Shot src="/images/booktkit.PNG" alt="Razorpay payment step" ratio="4/3" />
+</Gallery>
+
+<Section heading="Outcome">
+
+Describe what shipped and what it changed.
+
+</Section>

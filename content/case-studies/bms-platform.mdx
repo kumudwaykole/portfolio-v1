@@ -1,0 +1,144 @@
+{/*
+  IMAGES — every `src` below points at a file in `/public/images`, addressed as
+  `/images/<filename>`. Drop your screenshots into that folder and swap the
+  `src` values. `<Shot>` crops to the `ratio` you give it (default 4/3); pass
+  `fit="contain"` for full UI screenshots you don't want cropped.
+*/}
+
+export const metadata = {
+  slug: "bms-platform",
+  order: 1,
+  title: "Book My Services",
+  subtitle:
+    "A home services marketplace built for scale — three applications, one architecture.",
+  description:
+    "A full-stack home services marketplace platform — think UrbanClap for the UK — built on a TypeScript monorepo with separate apps for customers, technicians, and admins.",
+  client: "Book My Services",
+  year: "2026",
+  role: "Technical Lead · Full Stack",
+  tags: ["Marketplace", "Full Stack", "Architecture", "TypeScript"],
+  heroImage: "/images/booktkit.PNG",
+  coverImage: "/images/booktkit.PNG",
+  stats: [
+    { label: "Team size", value: "7" },
+    { label: "Duration", value: "3 mo" },
+    { label: "Applications", value: "3" },
+    { label: "Stack", value: "Next.js" },
+  ],
+  review: {
+    initials: "AK",
+    name: "Product Owner",
+    role: "Book My Services",
+    text: "The architecture decisions made early on paid off throughout the entire build. The team delivered a platform we're genuinely proud to launch.",
+  },
+};
+
+<Section heading="Overview">
+
+Book My Services is a home services marketplace for the UK market — connecting
+homeowners with vetted cleaners and service technicians. The platform needed to
+support three distinct user types: customers booking services, technicians
+managing their jobs in the field, and admins overseeing the entire operation.
+
+I was brought in as technical lead and architect, responsible for the full-stack
+direction across all three applications. The team of seven delivered the
+platform in three months.
+
+</Section>
+
+<Gallery layout="offset">
+  <Shot
+    src="/images/booktkit.PNG"
+    alt="Book My Services customer booking flow"
+    ratio="3/4"
+    caption="Customer app — booking journey"
+  />
+  <Shot
+    src="/images/booktkit.PNG"
+    alt="Book My Services technician application"
+    ratio="4/3"
+    caption="Technician app — field view"
+  />
+</Gallery>
+
+<Section heading="The Challenge" layout="split">
+
+Building a marketplace means building multiple products simultaneously — each
+with its own interaction model, performance requirements, and data needs — while
+keeping shared logic consistent and the codebase maintainable as the team scaled.
+
+- Three separate applications needed to share types, validation logic, and UI components without duplicating code or drifting out of sync.
+- Build times and developer experience had to stay fast across a growing monorepo as the team worked in parallel.
+- Database schema changes needed coordinating carefully — a migration that broke one application could take down the entire platform.
+
+</Section>
+
+<Section heading="Architecture" layout="split">
+
+The foundation was a Turborepo monorepo, giving the team a single repository for
+all three applications with shared internal packages for types, validators, and
+UI components. Turbo's build pipeline handled caching and parallel execution,
+keeping CI fast and local builds predictable.
+
+The backend was built with Express and PostgreSQL, with Prisma managing the data
+layer. Schema migrations were treated as a first-class concern — every change was
+reviewed for cross-application impact before being applied.
+
+Redis and BullMQ handled background job processing for booking confirmations,
+notifications, and scheduled tasks. Stripe powered the payment layer end to end.
+
+</Section>
+
+<Gallery layout="duo">
+  <Shot
+    src="/images/booktkit.PNG"
+    alt="Admin dashboard overview"
+    ratio="4/3"
+    caption="Admin — operations dashboard"
+  />
+  <Shot
+    src="/images/booktkit.PNG"
+    alt="Shared design system components"
+    ratio="4/3"
+    caption="Shared component package"
+  />
+</Gallery>
+
+<Section layout="right">
+
+The three applications served very different users. The customer-facing web app
+focused on a fast, confident booking journey. The technician application was
+optimised for field use — quick to load, easy to action on mobile. The admin
+dashboard gave the operations team full visibility and control.
+
+Leading a team of seven meant decisions needed to be clear and documented.
+Architecture choices were written up so engineers could work autonomously within
+agreed boundaries, and code reviews enforced the shared conventions that kept the
+monorepo coherent.
+
+</Section>
+
+<Gallery layout="offsetReverse">
+  <Shot
+    src="/images/booktkit.PNG"
+    alt="Booking confirmation screen"
+    ratio="1/1"
+    caption="Confirmation state"
+  />
+  <Shot
+    src="/images/booktkit.PNG"
+    alt="Marketplace landing page"
+    ratio="16/9"
+    caption="Marketplace landing"
+  />
+</Gallery>
+
+<Section heading="Outcome">
+
+The platform launched in 2026 and is live at
+[bookmyservices.co.uk](https://bookmyservices.co.uk). The monorepo architecture
+delivered what it was designed to — a codebase where three applications could
+evolve in parallel without stepping on each other, and where shared logic stayed
+consistent across the entire product.
+
+</Section>

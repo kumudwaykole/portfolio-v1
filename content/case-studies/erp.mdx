@@ -1,0 +1,78 @@
+{/*
+  DRAFT SCAFFOLD — replace the placeholder values below with the real project
+  details (client, year, stats, review) and write the body sections.
+  While `draft: true`, the /work card and case study page show a "writing"
+  notice instead of pretending the write-up is finished.
+
+  IMAGES — every `src` points at a file in `/public/images`, addressed as
+  `/images/<filename>`. Drop screenshots into that folder and swap the `src`
+  values. `<Shot>` crops to the `ratio` you give it (default 4/3); pass
+  `fit="contain"` for full UI screenshots you don't want cropped.
+*/}
+
+export const metadata = {
+  slug: "erp",
+  order: 2,
+  title: "ERP Software",
+  subtitle: "An internal operations platform, rebuilt.",
+  description:
+    "A custom ERP replacing spreadsheet-driven operations with a single system for inventory, orders, and reporting.",
+  client: "",
+  year: "2025",
+  role: "Full Stack",
+  tags: ["Express", "React", "PostgreSQL"],
+  heroImage: "/images/booktkit.PNG",
+  coverImage: "/images/booktkit.PNG",
+  stats: [
+    { label: "Duration", value: "—" },
+    { label: "Team size", value: "—" },
+    { label: "Modules", value: "—" },
+    { label: "Stack", value: "React" },
+  ],
+  review: {
+    initials: "",
+    name: "",
+    role: "",
+    text: "",
+  },
+  draft: true,
+};
+
+<Section heading="Overview">
+
+Write the project overview here — what the product is, who it serves, and what
+you were responsible for.
+
+</Section>
+
+<Gallery layout="offset">
+  <Shot src="/images/booktkit.PNG" alt="ERP dashboard" ratio="3/4" />
+  <Shot src="/images/booktkit.PNG" alt="Inventory module" ratio="4/3" />
+</Gallery>
+
+<Section heading="The Challenge" layout="split">
+
+Describe the problem the build had to solve.
+
+- First constraint.
+- Second constraint.
+- Third constraint.
+
+</Section>
+
+<Section heading="Approach" layout="split">
+
+Describe the architecture and the decisions behind it.
+
+</Section>
+
+<Gallery layout="duo">
+  <Shot src="/images/booktkit.PNG" alt="Orders module" ratio="4/3" />
+  <Shot src="/images/booktkit.PNG" alt="Reporting view" ratio="4/3" />
+</Gallery>
+
+<Section heading="Outcome">
+
+Describe what shipped and what it changed.
+
+</Section>
