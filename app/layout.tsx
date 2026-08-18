@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Header } from "./components/header/index";
+import { SmoothScroll } from "./components/smooth-scroll";
 import "./globals.css";
 
 /**
@@ -30,8 +31,10 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", geist.variable, "font-sans")}
     >
       <body className="flex min-h-full flex-col">
-        <Header />
-        {children}
+        <SmoothScroll>
+          <Header />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

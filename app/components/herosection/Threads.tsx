@@ -122,7 +122,6 @@ export default function Threads({
   enableMouseInteraction = false,
 }: ThreadsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const frameRef = useRef(0);
   const [red, green, blue] = color;
 
   useEffect(() => {
@@ -158,9 +157,9 @@ export default function Threads({
       const height = container.clientHeight;
       if (!width || !height) return;
 
-      const baseDpr = Math.min(window.devicePixelRatio || 1, 2);
+      const baseDpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const longestSide = Math.max(width, height) * baseDpr;
-      renderer.dpr = longestSide > 1920 ? (baseDpr * 1920) / longestSide : baseDpr;
+      renderer.dpr = longestSide > 1600 ? (baseDpr * 1600) / longestSide : baseDpr;
       renderer.setSize(width, height);
       program.uniforms.iResolution.value.set(
         gl.canvas.width,
@@ -182,21 +181,17 @@ export default function Threads({
       targetMouse = [0.5, 0.5];
     };
 
-    let isVisible = true;
-    const intersectionObserver = new IntersectionObserver(([entry]) => {
-      isVisible = entry.isIntersecting;
-    });
-    const resizeObserver = new ResizeObserver(resize);
-    intersectionObserver.observe(container);
-    resizeObserver.observe(container);
-    container.addEventListener("pointermove", onPointerMove);
-    container.addEventListener("pointerleave", onPointerLeave);
-    resize();
+    // The shader is heavy enough (40 lines x noise samples, up to viewport-sized
+    // canvas) that it's only worth running while the hero is actually on
+    // screen. rAF is fully started/stopped (not just skipped) so an
+    // off-screen or backgrounded tab does zero work, not even idle ticks.
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const frameInterval = 1000 / 30;
+    let lastRenderTime = 0;
+    let rafId = 0;
+    let isIntersecting = false;
 
-    const update = (time: number) => {
-      frameRef.current = requestAnimationFrame(update);
-      if (!isVisible || document.hidden) return;
-
+    const render = (time: number) => {
       if (enableMouseInteraction) {
         currentMouse[0] += 0.05 * (targetMouse[0] - currentMouse[0]);
         currentMouse[1] += 0.05 * (targetMouse[1] - currentMouse[1]);
@@ -209,12 +204,47 @@ export default function Threads({
       program.uniforms.iTime.value = time * 0.001;
       renderer.render({ scene: mesh });
     };
-    frameRef.current = requestAnimationFrame(update);
+
+    const loop = (time: number) => {
+      rafId = requestAnimationFrame(loop);
+      if (time - lastRenderTime < frameInterval) return;
+      lastRenderTime = time;
+      render(time);
+    };
+
+    const startLoop = () => {
+      if (rafId) return;
+      lastRenderTime = 0;
+      rafId = requestAnimationFrame(loop);
+    };
+    const stopLoop = () => {
+      if (!rafId) return;
+      cancelAnimationFrame(rafId);
+      rafId = 0;
+    };
+    const syncLoop = () => {
+      if (isIntersecting && !document.hidden && !prefersReducedMotion) startLoop();
+      else stopLoop();
+    };
+
+    const intersectionObserver = new IntersectionObserver(([entry]) => {
+      isIntersecting = entry.isIntersecting;
+      syncLoop();
+    }, { rootMargin: "0px 0px -20% 0px" });
+    const resizeObserver = new ResizeObserver(resize);
+    intersectionObserver.observe(container);
+    resizeObserver.observe(container);
+    container.addEventListener("pointermove", onPointerMove);
+    container.addEventListener("pointerleave", onPointerLeave);
+    document.addEventListener("visibilitychange", syncLoop);
+    resize();
+    if (prefersReducedMotion) render(0);
 
     return () => {
-      cancelAnimationFrame(frameRef.current);
+      stopLoop();
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
+      document.removeEventListener("visibilitychange", syncLoop);
       container.removeEventListener("pointermove", onPointerMove);
       container.removeEventListener("pointerleave", onPointerLeave);
       if (container.contains(gl.canvas)) container.removeChild(gl.canvas);

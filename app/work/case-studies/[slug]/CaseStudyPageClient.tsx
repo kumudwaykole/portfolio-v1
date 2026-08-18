@@ -139,7 +139,7 @@ function MoreProjects({ related }: { related: RelatedCaseStudy[] }) {
           See more projects
         </h2>
 
-        <a
+        <Link
           href="#top"
           className="group inline-flex items-center gap-2 border-b border-white/40 pb-1.5 text-[10px] font-medium uppercase tracking-[.2em] text-zinc-300 transition-colors hover:border-white hover:text-white"
         >
@@ -150,7 +150,7 @@ function MoreProjects({ related }: { related: RelatedCaseStudy[] }) {
             className="transition-transform group-hover:-translate-y-1"
             aria-hidden="true"
           />
-        </a>
+        </Link>
       </div>
 
       <div className="grid gap-4 sm:gap-6 md:grid-cols-2">

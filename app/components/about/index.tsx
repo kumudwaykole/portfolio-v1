@@ -30,7 +30,7 @@ export function About() {
 
           <div className="relative aspect-[4/5] w-full overflow-hidden border border-white/10 bg-zinc-950">
             <Image
-              src="/images/pass.jpg"
+              src="/images/portfolio image.jpg"
               alt="Kumud Waykole working at a multi-monitor development setup"
               fill
               sizes="(max-width: 1024px) 100vw, 40vw"

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Globe } from "@/components/ui/globe";
 
 const Arrow = () => (
@@ -31,7 +32,7 @@ export function Footer() {
 
         <div className="mt-10 grid gap-7 border-y border-white/10 py-8 sm:grid-cols-[1fr_auto] sm:items-end">
           <a href="mailto:hello@ikumud.com" className="group w-fit">
-            <span className="block text-[10px] font-medium uppercase tracking-[.24em] text-zinc-500">Email</span>
+            <span className="block text-xs font-medium uppercase tracking-[.24em] text-zinc-500">Email</span>
             <span className="mt-1 block text-base font-semibold transition-colors group-hover:text-purple-300">hello@ikumud.com</span>
           </a>
           <div className="flex gap-6 text-xs font-semibold uppercase tracking-wider text-zinc-400">
@@ -49,7 +50,7 @@ export function Footer() {
 
         <div className="flex flex-col gap-4 border-t border-white/5 pt-6 text-[10px] font-medium uppercase tracking-[.12em] text-zinc-600 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Kumud Waykole. All rights reserved.</p>
-          <a href="#top" className="transition-colors hover:text-purple-300">Back to top ↑</a>
+          <Link href="#top" className="transition-colors hover:text-purple-300">Back to top ↑</Link>
         </div>
       </div>
     </footer>

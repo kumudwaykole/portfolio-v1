@@ -78,8 +78,22 @@ body {
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
+}
+
+/* Lenis smooth scroll: native scroll-behavior is intentionally left unset
+   above since it fights Lenis's own easing on anchor jumps. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 :root {

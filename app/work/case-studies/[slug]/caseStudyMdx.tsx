@@ -9,6 +9,7 @@ import {
 } from "@/app/work/case-studies/[slug]/CaseStudyBlocks";
 import { RevealBlock } from "@/app/work/case-studies/[slug]/RevealBlock";
 import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 
 /**
@@ -53,10 +54,11 @@ function BlockQuote({ children }: ComponentPropsWithoutRef<"blockquote">) {
   return <PullQuote>{children}</PullQuote>;
 }
 
-function Anchor(props: ComponentPropsWithoutRef<"a">) {
+function Anchor({ href, ...props }: ComponentPropsWithoutRef<"a">) {
   return (
-    <a
+    <Link
       {...props}
+      href={href ?? "#"}
       className="text-white underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-white"
     />
   );

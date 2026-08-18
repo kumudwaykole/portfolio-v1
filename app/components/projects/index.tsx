@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { IconArrowNarrowUp } from "@tabler/icons-react";
 
 const projects = [
@@ -73,9 +74,9 @@ export function Projects() {
                                             <span key={tag} className="rounded border border-white/10 bg-black/60 px-2 py-1 text-[8px] uppercase text-zinc-300 backdrop-blur-sm">{tag}</span>
                                         ))}
                                     </div>
-                                    <a href={project.href} className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/45 bg-black/30 px-5 text-xs font-semibold transition hover:border-purple-300 hover:bg-purple-500 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300">
+                                    <Link href={project.href} className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/45 bg-black/30 px-5 text-xs font-semibold transition hover:border-purple-300 hover:bg-purple-500 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300">
                                         View case study <IconArrowNarrowUp size={16} stroke={1.5} className="rotate-45" aria-hidden="true" />
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </article>
