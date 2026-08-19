@@ -92,7 +92,7 @@ function ProjectRow({
     <div
       className={`pointer-events-none relative flex py-[9vh] sm:py-[12vh] ${right ? "justify-end" : "justify-start"}`}
     >
-      <Reveal className="pointer-events-auto relative w-full lg:w-[54%]">
+      <Reveal className="pointer-events-auto relative w-full lg:w-[68%]">
         <article className="group relative">
           <StrandNode className="-top-2.5" />
 
@@ -106,7 +106,7 @@ function ProjectRow({
                 src={project.coverImage}
                 alt=""
                 fill
-                sizes="(max-width: 1024px) 100vw, 54vw"
+                sizes="(max-width: 1024px) 100vw, 68vw"
                 className="object-cover saturate-[.85] transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:saturate-100"
               />
               <div

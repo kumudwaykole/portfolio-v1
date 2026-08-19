@@ -6,20 +6,20 @@ const projects = [
     {
         title: "ERP Software",
         tags: ["Express", "React"],
-        image: "/images/novastream.webp",
-        href: "#contact",
+        image: "/images/erp.jpg",
+        href: "/work/case-studies/erp",
     },
     {
         title: "Book My Services",
         tags: ["MERN", "Redux"],
-        image: "/images/zentask.webp",
-        href: "#contact",
+        image: "/images/bms.jpg",
+        href: "/work/case-studies/bms-platform",
     },
     {
         title: "Vaault Of Scents",
         tags: ["Next.js", "Razorpay"],
-        image: "/images/aura-commerce.webp",
-        href: "#contact",
+        image: "/images/vos.jpg",
+        href: "/work/case-studies/vos",
     },
     {
         title: "BookTkit",
@@ -38,10 +38,10 @@ export function Projects() {
                 <div className="grid gap-6 border-b border-white/10 pb-10 lg:grid-cols-[1fr_1fr] lg:items-end">
                     <div>
                         <p className="mb-3 text-[10px] font-semibold uppercase tracking-[.3em] text-purple-300">Selected work</p>
-                        <h2 id="projects-heading" className="text-3xl font-bold tracking-[-.04em] sm:text-4xl">Building for the modern web</h2>
+                        <h2 id="projects-heading" className="text-3xl font-bold tracking-[-.04em] sm:text-4xl">Real-World Software Projects</h2>
                     </div>
                     <p className="max-w-sm text-base leading-7 text-zinc-500 lg:justify-self-end">
-                        A curated selection of applications that blend performance with pixel-perfect design.
+                        Production-ready web applications and scalable software systems built with React, Next.js, Node.js, TypeScript, PostgreSQL, and Redis.
                     </p>
                 </div>
 

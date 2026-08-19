@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 import { Globe } from "@/components/ui/globe";
 
 const Arrow = () => (
@@ -15,7 +16,7 @@ export function Footer() {
         <div className="grid items-end gap-10 lg:grid-cols-[.95fr_1.05fr] lg:gap-16">
           <div>
             <span className="mb-5 inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[.32em] text-purple-300">
-              <span className="size-1.5 rotate-45 bg-purple-400" /> Final chapter
+              <span className="size-1.5 rotate-45 bg-purple-400" /> Have project in mind ?
             </span>
             <h2 className="text-[clamp(4rem,10vw,8.8rem)] font-black uppercase leading-[.76] tracking-[-.075em]">
               Get in<br /><span className="text-outline">touch</span>
@@ -23,21 +24,25 @@ export function Footer() {
           </div>
           <div className="group relative h-74 overflow-hidden border border-purple-300/35 bg-black transition-colors duration-300 hover:border-purple-300/55 sm:h-90">
             <div className="pointer-events-none absolute inset-x-0 top-6 z-10 text-center text-sm font-semibold tracking-wide text-zinc-100 sm:top-5 sm:text-xl">
-              <p className="italic">Let&apos;s connect</p>
+              <p className="italic">Let&apos;s Build together</p>
             </div>
             <Globe className="inset-x-0 bottom-auto top-14 w-[125%] max-w-150 -translate-x-[10%] sm:top-16 sm:w-full sm:translate-x-0" />
             <div className="pointer-events-none absolute inset-x-[8%] bottom-[-35%] aspect-square rounded-full bg-[radial-gradient(circle_at_50%_38%,rgba(192,132,252,.16),rgba(126,34,206,.055)_38%,transparent_67%)] opacity-75 transition-opacity duration-500 group-hover:opacity-100" aria-hidden="true" />
           </div>
         </div>
 
-        <div className="mt-10 grid gap-7 border-y border-white/10 py-8 sm:grid-cols-[1fr_auto] sm:items-end">
+        <div className="mt-10 grid gap-7 border-y border-white/10 py-4 sm:grid-cols-[1fr_auto] sm:items-end">
           <a href="mailto:hello@ikumud.com" className="group w-fit">
             <span className="block text-xs font-medium uppercase tracking-[.24em] text-zinc-500">Email</span>
             <span className="mt-1 block text-base font-semibold transition-colors group-hover:text-purple-300">hello@ikumud.com</span>
           </a>
           <div className="flex gap-6 text-xs font-semibold uppercase tracking-wider text-zinc-400">
-            <a href="https://github.com/" target="_blank" rel="noreferrer" className="hover:text-purple-300">GitHub</a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="hover:text-purple-300">LinkedIn</a>
+            <a href="https://github.com/kumudwaykole" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-purple-300">
+              <IconBrandGithub size={18} stroke={1.5} aria-hidden="true" /> /kumudwaykole
+            </a>
+            <a href="https://www.linkedin.com/in/kumud-waykole" target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-purple-300">
+              <IconBrandLinkedin size={18} stroke={1.5} aria-hidden="true" /> /kumud-waykole
+            </a>
           </div>
         </div>
 
