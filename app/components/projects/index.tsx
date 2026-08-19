@@ -47,18 +47,22 @@ export function Projects() {
 
                 <div className="divide-y divide-white/10">
                     {projects.map((project, index) => (
-                        <article key={project.title} className="group relative isolate min-h-36 bg-transparent transition-colors duration-500 hover:bg-white/[.035] focus-within:bg-white/[.035] sm:min-h-40">
+                        <article key={project.title} className="group relative min-h-36 bg-transparent sm:min-h-40">
+                            {/* Floats over the middle of the row, nudged down from center, like a kite
+                                drifting in — pointer-events-none so it never blocks the CTA underneath. */}
                             <div
-                                className="pointer-events-none absolute right-4 top-1/2 z-20 h-32 w-48 -translate-y-1/2 translate-x-4 scale-90 overflow-hidden rounded-2xl opacity-0 shadow-2xl shadow-black/60 transition-all duration-500 ease-out group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 group-focus-within:translate-x-0 group-focus-within:scale-100 group-focus-within:opacity-100 sm:h-40 sm:w-60 md:right-10"
+                                className="pointer-events-none absolute inset-0 z-20 flex translate-x-12 translate-y-6 items-center justify-center opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-within:opacity-100 sm:translate-x-20"
                                 aria-hidden="true"
                             >
-                                <Image
-                                    src={project.image}
-                                    alt=""
-                                    fill
-                                    sizes="240px"
-                                    className="scale-110 object-cover object-center transition-transform duration-700 group-hover:scale-100 group-focus-within:scale-100"
-                                />
+                                <div className="relative aspect-4/3 w-56 overflow-hidden rounded-2xl shadow-2xl shadow-black/60 ring-1 ring-white/10 group-hover:animate-kite-float group-focus-within:animate-kite-float sm:w-80">
+                                    <Image
+                                        src={project.image}
+                                        alt=""
+                                        fill
+                                        sizes="(max-width: 640px) 224px, 320px"
+                                        className="scale-110 object-cover object-center transition-transform duration-700 group-hover:scale-100 group-focus-within:scale-100"
+                                    />
+                                </div>
                             </div>
 
                             <div className="relative z-10 grid min-h-36 items-center gap-x-4 gap-y-5 px-3 py-7 sm:min-h-40 sm:grid-cols-[2.5rem_minmax(0,1fr)_auto] sm:px-4 md:gap-x-7">
@@ -68,19 +72,26 @@ export function Projects() {
                                     {project.title}
                                 </h3>
 
-                                <div className="col-start-1 row-start-3 flex flex-wrap items-center gap-4 transition-opacity duration-300 sm:col-start-3 sm:row-start-1 sm:justify-end sm:group-hover:opacity-0 sm:group-focus-within:opacity-0">
+                                <div className="col-start-1 row-start-3 flex flex-wrap items-center gap-4 sm:col-start-3 sm:row-start-1 sm:justify-end">
                                     <div className="flex flex-wrap gap-2">
                                         {project.tags.map((tag) => (
                                             <span key={tag} className="rounded border border-white/10 bg-black/60 px-2 py-1 text-[8px] uppercase text-zinc-300 backdrop-blur-sm">{tag}</span>
                                         ))}
                                     </div>
-                                    <Link href={project.href} className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/45 bg-black/30 px-5 text-xs font-semibold transition hover:border-purple-300 hover:bg-purple-500 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300">
+                                    <Link href={project.href} className="relative z-30 inline-flex min-h-10 items-center gap-2 rounded-full border border-white/45 bg-black/30 px-5 text-xs font-semibold transition hover:border-purple-300 hover:bg-purple-500 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300">
                                         View case study <IconArrowNarrowUp size={16} stroke={1.5} className="rotate-45" aria-hidden="true" />
                                     </Link>
                                 </div>
                             </div>
                         </article>
                     ))}
+                </div>
+
+                <div className="mt-14 flex justify-center sm:mt-16">
+                    <Link href="/work" className="group inline-flex min-h-12 items-center gap-2 rounded-full border border-white/20 bg-transparent px-7 text-sm font-semibold transition hover:border-purple-300 hover:bg-purple-500 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300">
+                        View all projects
+                        <IconArrowNarrowUp size={16} stroke={1.5} className="rotate-45 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+                    </Link>
                 </div>
             </div>
         </section>

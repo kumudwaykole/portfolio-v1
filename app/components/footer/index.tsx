@@ -42,9 +42,15 @@ export function Footer() {
         </div>
 
         <div className="grid items-center gap-8 py-10 md:grid-cols-[auto_1fr]">
-          <a href="mailto:hello@ikumud.com" className="group inline-flex min-h-20 items-center justify-center gap-4 bg-purple-500 px-10 text-base font-bold uppercase transition hover:bg-purple-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300 sm:min-w-72">
+          <button
+            type="button"
+            data-cal-link="kumud-waykole/15min"
+            data-cal-namespace="15min"
+            data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+            className="group inline-flex min-h-20 items-center justify-center gap-4 bg-purple-500 px-10 text-base font-bold uppercase transition hover:bg-purple-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300 sm:min-w-72"
+          >
             Let&apos;s talk <Arrow />
-          </a>
+          </button>
           <p className="select-none text-right text-[clamp(3rem,8vw,7rem)] font-black leading-none tracking-[-.07em] text-white/[.07]">KUMUD.W</p>
         </div>
 

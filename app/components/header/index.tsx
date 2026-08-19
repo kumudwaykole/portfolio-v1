@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const navigation = [
   { label: "About", href: "/#about" },
-  { label: "Work", href: "/#work" },
+  { label: "Work", href: "/work" },
   { label: "Experience", href: "/#experience" },
 ] as const;
 
@@ -33,12 +33,15 @@ export function Header() {
           ))}
         </nav>
 
-        <Link
-          href="/#contact"
+        <button
+          type="button"
+          data-cal-link="kumud-waykole/15min"
+          data-cal-namespace="15min"
+          data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
           className="hidden border border-purple-300/40 bg-purple-500/10 px-5 py-2.5 text-sm font-semibold text-purple-100 transition hover:bg-purple-500 hover:text-white md:inline-flex"
         >
           Let&apos;s talk
-        </Link>
+        </button>
 
         <details className="group relative md:hidden">
           <summary className="flex size-10 cursor-pointer list-none items-center justify-center rounded-full border border-zinc-200 text-zinc-950 transition hover:bg-zinc-100 [&::-webkit-details-marker]:hidden dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-800">
@@ -57,9 +60,15 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <Link href="/#contact" className="mt-1 block rounded-xl bg-zinc-950 px-4 py-3 text-center text-sm font-semibold text-white dark:bg-white dark:text-zinc-950">
+            <button
+              type="button"
+              data-cal-link="kumud-waykole/15min"
+              data-cal-namespace="15min"
+              data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+              className="mt-1 block w-full rounded-xl bg-zinc-950 px-4 py-3 text-center text-sm font-semibold text-white dark:bg-white dark:text-zinc-950"
+            >
               Let&apos;s talk
-            </Link>
+            </button>
           </nav>
         </details>
       </div>
