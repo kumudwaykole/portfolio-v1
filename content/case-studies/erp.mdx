@@ -1,12 +1,7 @@
 {/*
-DRAFT SCAFFOLD — replace the placeholder values below with the real project
-details (client, year, stats, review) and write the body sections.
-While `draft: true`, the /work card and case study page show a "writing"
-notice instead of pretending the write-up is finished.
-
-IMAGES — every `src` points at a file in `/public/images`, addressed as
-`/images/<filename>`. Drop screenshots into that folder and swap the `src`
-values. `<Shot>` crops to the `ratio` you give it (default 4/3); pass
+IMAGES — every `src` below points at a file in `/public/images`, addressed as
+`/images/<filename>`. Drop your screenshots into that folder and swap the
+`src` values. `<Shot>` crops to the `ratio` you give it (default 4/3); pass
 `fit="contain"` for full UI screenshots you don't want cropped.
 */}
 
@@ -14,20 +9,20 @@ export const metadata = {
   slug: "erp",
   order: 2,
   title: "ERP Software",
-  subtitle: "An internal operations platform, rebuilt.",
+  subtitle: "A 45-module freight and rail ERP, built by a four-person team.",
   description:
-    "A custom ERP replacing spreadsheet-driven operations with a single system for inventory, orders, and reporting.",
+    "A full-stack enterprise ERP for a multi-branch freight and rail logistics company — covering booking, GST-compliant documents, live GPS tracking, and background job processing.",
   client: "",
   year: "2025",
-  role: "Full Stack",
-  tags: ["Express", "React", "PostgreSQL"],
+  role: "Lead Full-Stack Developer",
+  tags: ["ERP", "Full Stack", "Real-Time", "TypeScript"],
   heroImage: "/images/erp.jpg",
   coverImage: "/images/erp.jpg",
   stats: [
-    { label: "Duration", value: "—" },
-    { label: "Team size", value: "—" },
-    { label: "Modules", value: "—" },
-    { label: "Stack", value: "React" },
+    { label: "Duration", value: "3.5 mo" },
+    { label: "Team size", value: "4" },
+    { label: "Modules", value: "45+" },
+    { label: "Stack", value: "Next.js" },
   ],
   review: {
     initials: "",
@@ -35,44 +30,163 @@ export const metadata = {
     role: "",
     text: "",
   },
-  draft: true,
 };
 
 <Section heading="Overview">
 
-Write the project overview here — what the product is, who it serves, and what
-you were responsible for.
+This ERP is the main operational system used by a multi-branch freight and
+rail logistics company. Dispatchers, branch managers, operations staff, and
+finance teams use it daily to manage goods from the initial customer booking
+through to final, GST-compliant delivery — including Lorry Receipts, Vehicle
+Placement scheduling, Goods Received Notes, delivery challans, trip
+documents, and e-way bills, alongside rail rake bookings and live GPS wagon
+tracking.
+
+I worked as Lead Full-Stack Developer on a four-person team, contributing
+across database design, backend APIs, frontend development, architecture,
+performance, security, and integrations. I took full ownership of rail
+operations, live GPS wagon tracking, delivery challans, Goods Received Notes,
+e-way bill generation, and performance work on the Vehicle Placement
+workflows. The team shipped the production-ready ERP in roughly three and a
+half months — more than 45 business modules, 25+ master-data modules, 185
+permissions, and two real-time systems for GPS tracking and notifications.
 
 </Section>
 
 <Gallery layout="offset">
-  <Shot src="/images/booktkit.png" alt="ERP dashboard" ratio="3/4" />
-  <Shot src="/images/booktkit.png" alt="Inventory module" ratio="4/3" />
+  <Shot
+    src="/images/erp-software.jpg"
+    alt="ERP dashboard overview"
+    ratio="3/4"
+    caption="Operations dashboard"
+  />
+  <Shot
+    src="/images/erp.jpg"
+    alt="ERP live GPS tracking view"
+    ratio="4/3"
+    caption="Live GPS wagon tracking"
+  />
 </Gallery>
 
 <Section heading="The Challenge" layout="split">
 
-Describe the problem the build had to solve.
+The hard part was never a single feature — it was designing an ERP that
+could hold customer and vehicle management, branch operations, freight
+documents, rail operations, GPS integrations, GST compliance, and reporting
+without becoming impossible to reason about.
 
-- First constraint.
-- Second constraint.
-- Third constraint.
+- New modules had to slot in without touching unrelated parts of the app, while still sharing consistent validation, permissions, search, pagination, and exports.
+- Employees from multiple branches needed access strictly scoped to their branch, enforced on the backend, not just hidden in the UI.
+- Dispatchers and branch staff use the system to make real-time operational calls, so high-traffic pages needed to stay fast even under heavy data volumes.
 
 </Section>
 
-<Section heading="Approach" layout="split">
+<Section heading="Architecture" layout="split">
 
-Describe the architecture and the decisions behind it.
+The project is a Turborepo monorepo managed with pnpm, containing a Node.js
+/ Express 5 / TypeScript / Prisma / PostgreSQL backend and a Next.js 16 /
+React / TypeScript frontend, plus shared internal packages for UI
+components, validation, and types.
+
+Both apps follow a modular-monolith, vertical-slice structure — each
+business area keeps its database logic, API routes, validation, and UI
+together, so modules stay independent and changes in one area rarely ripple
+into another. Prisma defines the schema and migrations; Zod schemas are
+shared between backend and frontend so a request the API accepts is always a
+request the form could have sent, and TypeScript types are derived from the
+same schemas end to end.
+
+Authentication uses JWTs in secure HTTP-only cookies, with an Axios
+interceptor that silently refreshes an expired session and retries the
+original request. The RBAC system checks both permissions and branch access
+server-side across 185 individual permissions, with the user's permission
+and branch data cached in memory for five minutes to avoid a database
+round-trip on every check. Redis and BullMQ handle background work —
+notifications and queued jobs — off the request path, and Socket.IO pushes
+live GPS positions and notification updates to the frontend. Multi-step
+operations (reserving Lorry Receipt number blocks, completing a trip) run in
+short Prisma transactions, with permission checks and data prep done before
+the transaction opens to avoid lock contention and timeouts.
 
 </Section>
 
 <Gallery layout="duo">
-  <Shot src="/images/booktkit.png" alt="Orders module" ratio="4/3" />
-  <Shot src="/images/booktkit.png" alt="Reporting view" ratio="4/3" />
+  <Shot
+    src="/images/erp-software.jpg"
+    alt="Rail rake operations module"
+    ratio="4/3"
+    caption="Rail rake operations"
+  />
+  <Shot
+    src="/images/erp.jpg"
+    alt="Vehicle placement scheduling"
+    ratio="4/3"
+    caption="Vehicle Placement scheduling"
+  />
 </Gallery>
+
+<Section layout="right">
+
+I owned rail freight operations end to end — Prisma models and migrations
+for rail rake management, railway branch Goods Received Notes, wagon
+assignments, and dispatch/unloading tracking, plus the Express APIs and
+React interfaces that let branch employees run a rail shipment from booking
+through goods receipt, unloading, and completion.
+
+On top of that I built the live GPS wagon tracking integration against a
+Traccar-based GPS provider, with an assignment system linking devices to
+wagons (a database constraint guarantees at most one active assignment per
+wagon) and a Socket.IO feed pushing new positions to the map in near real
+time.
+
+</Section>
+
+<Gallery layout="offsetReverse">
+  <Shot
+    src="/images/erp.jpg"
+    alt="Delivery challan document"
+    ratio="1/1"
+    caption="Delivery challan"
+  />
+  <Shot
+    src="/images/erp-software.jpg"
+    alt="E-way bill generation"
+    ratio="16/9"
+    caption="GST e-way bill generation"
+  />
+</Gallery>
+
+<Section heading="Performance & Documents">
+
+Vehicle Placement Loading and Scheduling were the two most-used, slowest
+screens in the app. Profiling turned up repeated API calls for the same
+data, expensive queries, missing indexes, search-on-every-keystroke, and
+read-heavy lookups fetched over and over. I added Redis caching for that
+lookup data, wrote targeted Prisma migrations with composite indexes for the
+common query patterns, and debounced search input — noticeably faster pages
+with no change to the existing workflow. The same caching and indexing
+approach was later reused elsewhere in the app.
+
+I also built the Delivery Challan module and Goods Received Note forms
+across the full stack, and implemented GST e-way bill generation straight
+from Lorry Receipt data so employees never re-enter shipment details.
+Puppeteer generates print-ready PDFs — consignment notes, trip sheets, and
+other transport documents — on the server. Separately, I tracked down and
+fixed a BigInt-to-JSON serialization bug that was corrupting large numeric
+values as they moved from PostgreSQL through Prisma and the API to the
+frontend.
+
+</Section>
 
 <Section heading="Outcome">
 
-Describe what shipped and what it changed.
+In about three and a half months, the four-person team delivered a
+production ERP spanning 45+ business modules, 25+ master-data entities, 185
+permissions, branch-level data access, GST document generation, live GPS
+tracking, automated PDF generation, Redis caching, and background job
+processing. The rail operations and GPS tracking areas I led went from an
+empty schema to a complete production feature in a few weeks, and the
+performance approach I introduced for Vehicle Placement became the template
+the team reused for other high-traffic modules.
 
 </Section>

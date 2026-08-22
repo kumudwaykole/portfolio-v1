@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 import { Globe } from "@/components/ui/globe";
 import { EncryptedText } from "@/components/ui/encrypted-text";
+import { BackToTop } from "./back-to-top";
 const Arrow = () => (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-5">
     <path
@@ -21,7 +21,7 @@ export function Footer() {
       className="relative overflow-hidden border-t border-white/10 bg-[#08070a] text-white"
     >
       <div
-        className="anime-speed-lines absolute inset-0 opacity-30"
+        className="anime-speed-lines pointer-events-none absolute inset-0 opacity-30"
         aria-hidden="true"
       />
       <div className="relative mx-auto max-w-7xl px-5 pb-7 pt-20 sm:px-8 sm:pt-28 lg:px-12">
@@ -100,9 +100,9 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} Kumud Waykole. All rights reserved.
           </p>
-          <Link href="#top" className="transition-colors hover:text-purple-300">
+          <BackToTop className="transition-colors hover:text-purple-300">
             Back to top ↑
-          </Link>
+          </BackToTop>
         </div>
       </div>
     </footer>
