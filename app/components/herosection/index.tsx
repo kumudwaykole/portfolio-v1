@@ -21,11 +21,11 @@ export default function HeroSection() {
           </span>
         </h1>
 
-        <p className="mt-7 max-w-2xl text-pretty text-base leading-7 text-zinc-400 sm:mt-9 sm:text-lg sm:leading-8">
+        <p className="mt-7 max-w-2xl font-normal text-pretty text-base leading-7 text-zinc-400 sm:mt-9 sm:text-lg sm:leading-8">
           Specializing in React, Next.js, Node.js, TypeScript, and scalable system design, building secure, high-performance web applications from frontend to production.
         </p>
 
-        <Link href="#work" className="group mt-9 inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-purple-400/30 bg-zinc-950/85 px-8 text-sm font-medium text-zinc-200 shadow-[0_0_28px_rgba(168,85,247,0.30)] backdrop-blur transition hover:-translate-y-0.5 hover:border-purple-300/60 hover:text-white hover:shadow-[0_0_38px_rgba(168,85,247,0.42)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300 sm:mt-11 sm:px-10 sm:text-base">
+        <Link href="#work" className="group mt-9 inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-purple-400/30 bg-zinc-950/85 px-8 text-sm font-semibold text-zinc-200 shadow-[0_0_28px_rgba(168,85,247,0.30)] backdrop-blur transition hover:-translate-y-0.5 hover:border-purple-300/60 hover:text-white hover:shadow-[0_0_38px_rgba(168,85,247,0.42)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300 sm:mt-11 sm:px-10 sm:text-base">
           View Recent Projects
           <span aria-hidden="true" className="text-lg transition-transform group-hover:translate-y-1">↓</span>
         </Link>

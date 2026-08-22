@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import localFont from "next/font/local";
 import Script from "next/script";
 import { Header } from "./components/header/index";
 import { SmoothScroll } from "./components/smooth-scroll";
@@ -20,13 +20,35 @@ Cal.ns["15min"]("ui", {"cssVarsPerTheme":{"light":{"cal-brand":"#AD46FF"},"dark"
 `;
 
 /**
- * One typeface for the whole site. Geist carries both the large display
- * headings and the small uppercase labels, so nothing else needs loading —
- * see the font tokens in globals.css, which all resolve back to this.
+ * One typeface for the whole site: Franie. Three static cuts are
+ * self-hosted — Regular (400), Bold (700), and Black (900) — registered at
+ * their true weights. The body defaults to Black (see globals.css); use the
+ * `font-normal` / `font-semibold` / `font-bold` utilities to reach the other
+ * cuts explicitly rather than relying on the browser's font-weight fallback,
+ * since an unlisted weight (e.g. `font-medium`) now resolves to whichever
+ * registered cut is nearest, which is Regular as of this weight.
+ * See the font tokens in globals.css, which all resolve back to this.
  */
-const geist = Geist({
-  subsets: ["latin"],
+const franie = localFont({
+  src: [
+    {
+      path: "../public/fonts/Franie-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Franie-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Franie-Black.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
   variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -42,7 +64,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", geist.variable, "font-sans")}
+      className={cn("h-full", "antialiased", franie.variable, "font-sans")}
     >
       <body className="flex min-h-full flex-col">
         <Script id="cal-embed" strategy="afterInteractive">

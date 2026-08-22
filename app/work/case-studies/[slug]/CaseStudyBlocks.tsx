@@ -48,7 +48,7 @@ export function Section({
         <div className={isGrid ? "md:col-span-4" : ""}>
           <RevealBlock>
             <h2
-              className={`mb-7 text-[clamp(1.9rem,4.4vw,3.15rem)] font-medium leading-[1.05] tracking-[-.035em] text-white ${
+              className={`mb-7 text-[clamp(1.9rem,4.4vw,3.15rem)] font-bold leading-[1.05] tracking-[-.035em] text-white ${
                 isGrid ? "md:mb-0" : ""
               }`}
             >
@@ -68,7 +68,7 @@ export function Section({
 export function Prose({ children }: { children: ReactNode }) {
   return (
     <RevealBlock>
-      <p className="mb-6 text-[15px] leading-[1.7] text-zinc-400 last:mb-0 sm:text-[16.5px]">
+      <p className="mb-6 font-normal text-[15px] leading-[1.7] text-zinc-400 last:mb-0 sm:text-[16.5px]">
         {children}
       </p>
     </RevealBlock>
@@ -185,7 +185,7 @@ export function Shot({
         </div>
 
         {caption ? (
-          <figcaption className="mt-3 text-[10px] font-medium uppercase tracking-[.16em] text-zinc-600">
+          <figcaption className="mt-3 text-[10px] font-semibold uppercase tracking-[.16em] text-zinc-600">
             {caption}
           </figcaption>
         ) : null}
@@ -206,11 +206,11 @@ export function PullQuote({
   return (
     <RevealBlock>
       <figure className="mx-auto my-24 max-w-4xl text-center sm:my-32">
-        <blockquote className="text-[clamp(1.35rem,3.2vw,2.25rem)] font-medium leading-[1.25] tracking-[-.03em] text-white [&_p]:m-0">
+        <blockquote className="text-[clamp(1.35rem,3.2vw,2.25rem)] font-normal leading-[1.25] tracking-[-.03em] text-white [&_p]:m-0">
           {children}
         </blockquote>
         {attribution ? (
-          <figcaption className="mt-7 text-[10px] font-medium uppercase tracking-[.22em] text-zinc-500">
+          <figcaption className="mt-7 text-[10px] font-semibold uppercase tracking-[.22em] text-zinc-500">
             {attribution}
           </figcaption>
         ) : null}
@@ -230,7 +230,7 @@ export function FactList({ children }: { children: ReactNode }) {
 export function Fact({ children }: { children: ReactNode }) {
   return (
     <RevealBlock>
-      <li className="flex gap-4 text-[15px] leading-[1.7] text-zinc-400 sm:text-[16.5px]">
+      <li className="flex gap-4 font-normal text-[15px] leading-[1.7] text-zinc-400 sm:text-[16.5px]">
         <span
           className="mt-[.7em] block size-[3px] shrink-0 bg-purple-400"
           aria-hidden="true"

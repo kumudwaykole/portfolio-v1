@@ -21,7 +21,7 @@ export function Header() {
           <span>Kumud Waykole</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 text-[11px] font-medium uppercase tracking-[.18em] text-zinc-400 md:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-8 text-[11px] font-semibold uppercase tracking-[.18em] text-zinc-400 md:flex" aria-label="Main navigation">
           {navigation.map((item) => (
             <Link
               key={item.href}
@@ -56,7 +56,7 @@ export function Header() {
 
           <nav className="absolute right-0 top-13 w-56 rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl shadow-zinc-950/10 dark:border-zinc-800 dark:bg-zinc-900" aria-label="Mobile navigation">
             {navigation.map((item) => (
-              <Link key={item.href} href={item.href} className="block rounded-xl px-4 py-3 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800">
+              <Link key={item.href} href={item.href} className="block rounded-xl px-4 py-3 text-sm font-semibold text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800">
                 {item.label}
               </Link>
             ))}

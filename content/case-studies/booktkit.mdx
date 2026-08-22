@@ -1,0 +1,149 @@
+{/*
+IMAGES — every `src` below points at a file in `/public/images`, addressed as
+`/images/<filename>`. Drop your screenshots into that folder and swap the
+`src` values. `<Shot>` crops to the `ratio` you give it (default 4/3); pass
+`fit="contain"` for full UI screenshots you don't want cropped.
+*/}
+
+export const metadata = {
+  slug: "booktkit",
+  order: 4,
+  title: "BookTkit",
+  subtitle: "A full-stack event ticketing platform, from discovery to QR entry.",
+  description:
+    "A full-stack event ticketing platform for event discovery, online booking, automated payments, organizer payouts, and QR-based attendee check-in.",
+  client: "BookTkit",
+  year: "2026",
+  role: "Team Lead · Full Stack",
+  tags: ["Next.js", "PostgreSQL", "Razorpay", "Redis"],
+  heroImage: "/images/booktkit.png",
+  coverImage: "/images/booktkit.png",
+  stats: [
+    { label: "Team size", value: "4" },
+    { label: "Duration", value: "8 wks" },
+    { label: "Applications", value: "5" },
+    { label: "Stack", value: "Next.js" },
+  ],
+  review: {
+    initials: "",
+    name: "",
+    role: "",
+    text: "",
+  },
+};
+
+<Section heading="Overview">
+
+BookTkit is an event ticketing platform. It brings attendees, event
+organizers, and platform admins together in one app. Customers can find
+events, search by name or location, pick their tickets, pay online, manage
+their bookings, and use a QR code to get into the venue.
+
+Organizers get a dashboard to create and manage events, set up ticket types
+and sale windows, track revenue, manage attendees, run promo codes, and scan
+tickets at the door. Admins have their own view for managing events across
+the platform, handling refunds, and keeping an eye on payouts.
+
+I led a team of four on this project and worked across the whole event
+journey — from how organizers create an event to how a customer gets scanned
+in at the gate — over about eight weeks.
+
+</Section>
+
+<Gallery layout="offset">
+  <Shot
+    src="/images/booktkit.png"
+    alt="BookTkit event discovery and booking flow"
+    ratio="3/4"
+    caption="Customer app — event discovery and checkout"
+  />
+  <Shot
+    src="/images/booktkit.png"
+    alt="BookTkit organizer dashboard"
+    ratio="4/3"
+    caption="Organizer dashboard — revenue and ticket sales"
+  />
+</Gallery>
+
+<Section heading="The Challenge" layout="split">
+
+The hard part was keeping everything in sync — ticket stock, payments, QR
+codes, refunds, organizer payouts, and check-ins — without relying on any
+single step going perfectly, like a browser staying open or a webhook
+arriving on time.
+
+- A payment can succeed even if the browser closes or a webhook is late, so we needed backup ways to confirm the payment and still issue the ticket.
+- Refunds work differently depending on who cancels — the customer or the organizer — so we had to calculate the right amount, reverse organizer payouts, and make sure nothing gets refunded twice.
+- Customers, organizers, event staff, and admins all needed their own screens and permissions, while looking at the same underlying event and order data.
+
+</Section>
+
+<Section heading="Approach" layout="split">
+
+As team lead, I set the direction for the architecture: one Next.js app,
+built with the App Router, serving the public event pages, customer
+checkout, organizer tools, and admin dashboards. Behind that sit around 70
+API routes for auth, events, bookings, tickets, check-in, payments, refunds,
+and organizer finance. Sign-in uses NextAuth with Google and email/password,
+and every route checks that the right role — customer, organizer, admin, or
+background worker — is allowed to call it.
+
+PostgreSQL with Prisma stores everything: users, events, tickets, orders,
+attendees, check-ins, promo codes, refunds, and organizer payout records.
+For anything money-related — completing an order, freeing up ticket stock,
+finishing a refund — we used database transactions so the numbers always
+stay correct.
+
+For work that shouldn't block the user, like generating a ticket or
+processing a refund, we used background queues on Redis. Razorpay webhooks,
+background workers, and scheduled jobs quietly pick up anything that was
+missed — a late payment, an unfinished refund, an organizer payout that's
+ready to release.
+
+</Section>
+
+<Gallery layout="duo">
+  <Shot
+    src="/images/booktkit.png"
+    alt="BookTkit QR check-in scanner"
+    ratio="4/3"
+    caption="QR check-in scanner"
+  />
+  <Shot
+    src="/images/booktkit.png"
+    alt="BookTkit finance and payouts view"
+    ratio="4/3"
+    caption="Admin finance — payouts and refunds"
+  />
+</Gallery>
+
+<Section layout="right">
+
+On the event side, I built the event creation flow — a multi-step form with
+a rich-text editor for descriptions, venue search, image uploads, and
+support for both one-off and recurring events. Paid events go through a
+Razorpay KYC check before organizers can publish them.
+
+On the customer side, I built search, checkout with Razorpay, payment
+retries if something fails, booking history, refund requests, and PDF
+tickets with a QR code for entry.
+
+For organizers and admins, I built the revenue and sales charts, attendee
+management with spreadsheet exports, promo codes, and the QR scanner for
+checking people in. I also built the finance tools: organizer bank account
+setup, holding payouts until after the event, refund retries, and recovering
+any shortfall from a future payout.
+
+</Section>
+
+<Section heading="Outcome">
+
+BookTkit shipped as one platform covering the full event journey — publish,
+discover, pay, get the ticket, check in, and, if needed, refund and settle
+up with the organizer. The background jobs and retries mean the system
+recovers on its own from things like a missed webhook, instead of leaving a
+customer without a ticket. The codebase sits at roughly 35,000 lines across
+the project, and the core financial calculations are covered by 32
+automated tests, all passing.
+
+</Section>

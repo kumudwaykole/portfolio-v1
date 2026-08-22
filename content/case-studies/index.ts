@@ -2,6 +2,9 @@ import type { CaseStudyEntry, CaseStudyMetadata } from "@/app/work/types";
 import BmsPlatform, {
   metadata as bmsPlatformMetadata,
 } from "@/content/case-studies/bms-platform.mdx";
+import BookTkit, {
+  metadata as bookTkitMetadata,
+} from "@/content/case-studies/booktkit.mdx";
 import Erp, { metadata as erpMetadata } from "@/content/case-studies/erp.mdx";
 import Vos, { metadata as vosMetadata } from "@/content/case-studies/vos.mdx";
 
@@ -9,6 +12,7 @@ const caseStudies: CaseStudyEntry[] = [
   { metadata: bmsPlatformMetadata, Content: BmsPlatform },
   { metadata: erpMetadata, Content: Erp },
   { metadata: vosMetadata, Content: Vos },
+  { metadata: bookTkitMetadata, Content: BookTkit },
 ].sort((left, right) => left.metadata.order - right.metadata.order);
 
 export function getAllCaseStudies(): CaseStudyEntry[] {

@@ -21,7 +21,7 @@ import type { ComponentPropsWithoutRef } from "react";
 function HeadingTwo({ children }: ComponentPropsWithoutRef<"h2">) {
   return (
     <RevealBlock>
-      <h2 className="mt-24 mb-7 text-[clamp(1.9rem,4.4vw,3.15rem)] font-medium leading-[1.05] tracking-[-.035em] text-white first:mt-0 sm:mt-32">
+      <h2 className="mt-24 mb-7 text-[clamp(1.9rem,4.4vw,3.15rem)] font-bold leading-[1.05] tracking-[-.035em] text-white first:mt-0 sm:mt-32">
         {children}
       </h2>
     </RevealBlock>
@@ -31,7 +31,7 @@ function HeadingTwo({ children }: ComponentPropsWithoutRef<"h2">) {
 function HeadingThree({ children }: ComponentPropsWithoutRef<"h3">) {
   return (
     <RevealBlock>
-      <h3 className="mt-12 mb-4 text-[10px] font-medium uppercase tracking-[.24em] text-purple-300">
+      <h3 className="mt-12 mb-4 text-[10px] font-bold uppercase tracking-[.24em] text-purple-300">
         {children}
       </h3>
     </RevealBlock>
@@ -65,7 +65,7 @@ function Anchor({ href, ...props }: ComponentPropsWithoutRef<"a">) {
 }
 
 function Strong({ children }: ComponentPropsWithoutRef<"strong">) {
-  return <strong className="font-medium text-white">{children}</strong>;
+  return <strong className="font-bold text-white">{children}</strong>;
 }
 
 function MarkdownImage(props: ComponentPropsWithoutRef<"img">) {

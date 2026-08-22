@@ -55,18 +55,18 @@ function Hero({ projectCount }: { projectCount: number }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: EASE }}
       >
-        <span className="mb-7 inline-flex items-center gap-2 text-[10px] font-medium uppercase tracking-[.32em] text-purple-300">
+        <span className="mb-7 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[.32em] text-purple-300">
           <span className="size-1.5 rotate-45 bg-purple-400" /> The archive
         </span>
 
-        <h1 className="text-[clamp(3rem,11vw,9rem)] font-black uppercase leading-[.82] tracking-[-.07em]">
+        <h1 className="text-[clamp(3rem,11vw,9rem)] font-bold uppercase leading-[.82] tracking-[-.07em]">
           Selected <span className="text-outline">work</span>
           <sup className="ml-3 align-super text-[clamp(.65rem,1.6vw,1.1rem)] font-normal tracking-[.1em] text-purple-300/70">
             ({String(projectCount).padStart(2, "0")})
           </sup>
         </h1>
 
-        <p className="mx-auto mt-7 max-w-md text-base leading-7 text-zinc-500">
+        <p className="mx-auto mt-7 max-w-md font-normal text-base leading-7 text-zinc-500">
           A curated showcase of platforms, storefronts and internal tools —
           written up end to end, from constraint to shipped product.
         </p>
@@ -114,7 +114,7 @@ function ProjectRow({
                 aria-hidden="true"
               />
               {project.draft ? (
-                <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-[10px] font-medium uppercase tracking-[.18em] text-purple-200/80 backdrop-blur-sm">
+                <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.18em] text-purple-200/80 backdrop-blur-sm">
                   <span className="inline-block size-1 animate-pulse rounded-full bg-purple-400" />
                   Writing
                 </span>
@@ -130,13 +130,13 @@ function ProjectRow({
             </Link>
 
             <div className="mt-4 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between sm:gap-10">
-              <p className="max-w-xs text-sm leading-6 text-zinc-500">
+              <p className="max-w-xs font-normal text-sm leading-6 text-zinc-500">
                 {project.subtitle}
               </p>
 
               <Link
                 href={href}
-                className="group/cta flex w-full max-w-xs shrink-0 items-center justify-between gap-8 border-b border-white/25 pb-2.5 text-[11px] font-medium uppercase tracking-[.18em] text-zinc-300 transition-colors hover:border-purple-300 hover:text-purple-200 sm:w-auto"
+                className="group/cta flex w-full max-w-xs shrink-0 items-center justify-between gap-8 border-b border-white/25 pb-2.5 text-[11px] font-semibold uppercase tracking-[.18em] text-zinc-300 transition-colors hover:border-purple-300 hover:text-purple-200 sm:w-auto"
               >
                 Explore project
                 <svg
@@ -168,10 +168,10 @@ function ClosingCta() {
     <div className="pointer-events-none relative pb-24 pt-[10vh] text-center">
       <StrandNode className="top-0" />
       <Reveal className="pointer-events-auto">
-        <p className="text-[10px] font-medium uppercase tracking-[.32em] text-purple-300">
+        <p className="text-[10px] font-semibold uppercase tracking-[.32em] text-purple-300">
           Next chapter
         </p>
-        <h2 className="mt-6 text-[clamp(2.2rem,6.5vw,5rem)] font-black uppercase leading-[.86] tracking-[-.06em]">
+        <h2 className="mt-6 text-[clamp(2.2rem,6.5vw,5rem)] font-bold uppercase leading-[.86] tracking-[-.06em]">
           Have a project
           <br />
           <span className="text-outline">in mind?</span>
