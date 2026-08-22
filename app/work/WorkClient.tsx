@@ -2,6 +2,7 @@
 
 import { Strands } from "@/app/work/components/Strands";
 import type { ProjectMeta } from "@/app/work/types";
+import { EncryptedText } from "@/components/ui/encrypted-text";
 import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -138,7 +139,7 @@ function ProjectRow({
                 href={href}
                 className="group/cta flex w-full max-w-xs shrink-0 items-center justify-between gap-8 border-b border-white/25 pb-2.5 text-[11px] font-semibold uppercase tracking-[.18em] text-zinc-300 transition-colors hover:border-purple-300 hover:text-purple-200 sm:w-auto"
               >
-                Explore project
+                <EncryptedText text="Explore project" trigger="hover" />
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"

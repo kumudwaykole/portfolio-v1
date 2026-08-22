@@ -8,7 +8,10 @@ const navigation = [
 
 export function Header() {
   return (
-    <header id="top" className="sticky top-0 z-50 border-b border-purple-300/10 bg-[#08070a]/85 text-white backdrop-blur-xl">
+    <header
+      id="top"
+      className="sticky top-0 z-50 border-b border-purple-300/10 bg-[#08070a]/85 text-white backdrop-blur-xl"
+    >
       <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-5 sm:px-8">
         <Link
           href="/"
@@ -21,7 +24,10 @@ export function Header() {
           <span>Kumud Waykole</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 text-[11px] font-semibold uppercase tracking-[.18em] text-zinc-400 md:flex" aria-label="Main navigation">
+        <nav
+          className="hidden items-center gap-8 text-[11px] font-semibold uppercase tracking-[.18em] text-zinc-400 md:flex"
+          aria-label="Main navigation"
+        >
           {navigation.map((item) => (
             <Link
               key={item.href}
@@ -46,17 +52,38 @@ export function Header() {
         <details className="group relative md:hidden">
           <summary className="flex size-10 cursor-pointer list-none items-center justify-center rounded-full border border-zinc-200 text-zinc-950 transition hover:bg-zinc-100 [&::-webkit-details-marker]:hidden dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-800">
             <span className="sr-only">Toggle navigation</span>
-            <svg className="size-5 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+            <svg
+              className="size-5 group-open:hidden"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              aria-hidden="true"
+            >
               <path strokeLinecap="round" d="M4 7h16M4 12h16M4 17h16" />
             </svg>
-            <svg className="hidden size-5 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+            <svg
+              className="hidden size-5 group-open:block"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              aria-hidden="true"
+            >
               <path strokeLinecap="round" d="m6 6 12 12M18 6 6 18" />
             </svg>
           </summary>
 
-          <nav className="absolute right-0 top-13 w-56 rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl shadow-zinc-950/10 dark:border-zinc-800 dark:bg-zinc-900" aria-label="Mobile navigation">
+          <nav
+            className="absolute right-0 top-13 w-56 rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl shadow-zinc-950/10 dark:border-zinc-800 dark:bg-zinc-900"
+            aria-label="Mobile navigation"
+          >
             {navigation.map((item) => (
-              <Link key={item.href} href={item.href} className="block rounded-xl px-4 py-3 text-sm font-semibold text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800">
+              <Link
+                key={item.href}
+                href={item.href}
+                className="block rounded-xl px-4 py-3 text-sm font-semibold text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
+              >
                 {item.label}
               </Link>
             ))}

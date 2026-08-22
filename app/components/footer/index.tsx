@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 import { Globe } from "@/components/ui/globe";
-
+import { EncryptedText } from "@/components/ui/encrypted-text";
 const Arrow = () => (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-5">
     <path
@@ -54,8 +54,9 @@ export function Footer() {
             <span className="block text-xs font-semibold uppercase tracking-[.24em] text-zinc-500">
               Email
             </span>
+
             <span className="mt-1 block text-base font-semibold transition-colors group-hover:text-purple-300">
-              hello@ikumud.com
+              <EncryptedText text="hello@ikumud.com" trigger="hover" />
             </span>
           </a>
           <div className="flex gap-6 text-xs font-semibold uppercase tracking-wider text-zinc-400">
@@ -66,7 +67,7 @@ export function Footer() {
               className="flex items-center gap-2 hover:text-purple-300"
             >
               <IconBrandGithub size={18} stroke={1.5} aria-hidden="true" />{" "}
-              /kumudwaykole
+              <EncryptedText text="/kumudwaykole" trigger="hover" />
             </a>
             <a
               href="https://www.linkedin.com/in/kumud-waykole"
@@ -75,7 +76,7 @@ export function Footer() {
               className="flex items-center gap-2 hover:text-purple-300"
             >
               <IconBrandLinkedin size={18} stroke={1.5} aria-hidden="true" />{" "}
-              /kumud-waykole
+              <EncryptedText text="/kumud-waykole" trigger="hover" />
             </a>
           </div>
         </div>
