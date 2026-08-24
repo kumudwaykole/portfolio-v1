@@ -1,5 +1,6 @@
 "use client";
 
+import { BackToTop } from "@/app/components/footer/back-to-top";
 import type { CaseStudyMetadata } from "@/app/work/types";
 import { IconArrowNarrowUp } from "@tabler/icons-react";
 import { motion } from "motion/react";
@@ -139,10 +140,7 @@ function MoreProjects({ related }: { related: RelatedCaseStudy[] }) {
           See more projects
         </h2>
 
-        <Link
-          href="#top"
-          className="group inline-flex items-center gap-2 border-b border-white/40 pb-1.5 text-[10px] font-semibold uppercase tracking-[.2em] text-zinc-300 transition-colors hover:border-white hover:text-white"
-        >
+        <BackToTop className="group inline-flex items-center gap-2 border-b border-white/40 pb-1.5 text-[10px] font-semibold uppercase tracking-[.2em] text-zinc-300 transition-colors hover:border-white hover:text-white">
           Back to top
           <IconArrowNarrowUp
             size={14}
@@ -150,7 +148,7 @@ function MoreProjects({ related }: { related: RelatedCaseStudy[] }) {
             className="transition-transform group-hover:-translate-y-1"
             aria-hidden="true"
           />
-        </Link>
+        </BackToTop>
       </div>
 
       <div className="grid gap-4 sm:gap-6 md:grid-cols-2">

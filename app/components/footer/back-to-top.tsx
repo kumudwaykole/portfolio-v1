@@ -17,6 +17,11 @@ export function BackToTop({
       className={className}
       onClick={(event) => {
         event.preventDefault();
+        // Stop the click from bubbling to Lenis's own global anchor-click
+        // listener (options.anchors), which would independently fire a
+        // second, competing scrollTo("#top") and stall the animation
+        // partway through.
+        event.stopPropagation();
         // Lenis owns the actual scroll position while smoothWheel is on, so
         // a native/Next.js hash jump (document.body.scrollIntoView) gets
         // fought by Lenis's own animation loop and never visibly lands.
