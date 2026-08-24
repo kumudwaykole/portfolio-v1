@@ -176,6 +176,14 @@ export function Strands({ containerRef, className }: StrandsProps) {
     coreRefs.current[index]?.animate(keyframes, options);
   }, []);
 
+  /** Sends a current down all three strands, staggered. */
+  const burst = useCallback(() => {
+    if (reduced.current) return;
+    STRAND_FACTORS.forEach((_, index) => {
+      window.setTimeout(() => pulse(index), index * 120);
+    });
+  }, [pulse]);
+
   /* ── Wiring ─────────────────────────────────────────────────────── */
   useEffect(() => {
     const container = containerRef.current;
@@ -194,14 +202,24 @@ export function Strands({ containerRef, className }: StrandsProps) {
     // Only observe scroll while the section is actually on screen.
     const observer = new IntersectionObserver(
       ([entry]) => {
+        const wasVisible = visible.current;
         visible.current = entry.isIntersecting;
-        if (entry.isIntersecting) requestDraw();
+        if (entry.isIntersecting) {
+          requestDraw();
+          // Wake the strands up with a current each time they scroll into view.
+          if (!wasVisible) burst();
+        }
       },
       { rootMargin: "120px 0px" },
     );
     observer.observe(container);
 
     window.addEventListener("scroll", requestDraw, { passive: true });
+
+    // A broad, forgiving hover trigger — entering the section at all sends a
+    // current, rather than requiring the cursor to land on the hair-thin path.
+    const onPointerEnter = () => burst();
+    container.addEventListener("pointerenter", onPointerEnter);
 
     // Catches font swaps, image loads and orientation changes in one go.
     let resizeFrame = 0;
@@ -226,11 +244,12 @@ export function Strands({ containerRef, className }: StrandsProps) {
       observer.disconnect();
       resizeObserver.disconnect();
       window.removeEventListener("scroll", requestDraw);
+      container.removeEventListener("pointerenter", onPointerEnter);
       window.clearInterval(ambient);
       if (resizeFrame) cancelAnimationFrame(resizeFrame);
       if (frame.current) cancelAnimationFrame(frame.current);
     };
-  }, [containerRef, draw, measure, pulse, requestDraw]);
+  }, [containerRef, draw, measure, pulse, requestDraw, burst]);
 
   return (
     <svg
@@ -247,7 +266,7 @@ export function Strands({ containerRef, className }: StrandsProps) {
             }}
             fill="none"
             stroke="rgb(255 255 255 / 0.16)"
-            strokeWidth={1}
+            strokeWidth={1.5}
           />
           {/* Current: soft halo + bright core, same path, one dash each */}
           <path
