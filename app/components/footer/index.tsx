@@ -50,13 +50,13 @@ export function Footer() {
         </div>
 
         <div className="mt-10 grid gap-7 border-y border-white/10 py-4 sm:grid-cols-[1fr_auto] sm:items-end">
-          <a href="mailto:hello@ikumud.com" className="group w-fit">
+          <a href="mailto:kumudwaykole1@gmail.com" className="group w-fit">
             <span className="block text-xs font-semibold uppercase tracking-[.24em] text-zinc-500">
               Email
             </span>
 
             <span className="mt-1 block text-base font-semibold transition-colors group-hover:text-purple-300">
-              <EncryptedText text="hello@ikumud.com" trigger="hover" />
+              <EncryptedText text="kumudwaykole1@gmail.com" trigger="hover" />
             </span>
           </a>
           <div className="flex gap-6 text-xs font-semibold uppercase tracking-wider text-zinc-400">
