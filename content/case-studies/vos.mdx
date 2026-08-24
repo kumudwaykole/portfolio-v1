@@ -1,33 +1,23 @@
-{/*
-DRAFT SCAFFOLD — replace the placeholder values below with the real project
-details (client, year, stats, review) and write the body sections.
-While `draft: true`, the /work card and case study page show a "writing"
-notice instead of pretending the write-up is finished.
-
-IMAGES — every `src` points at a file in `/public/images`, addressed as
-`/images/<filename>`. Drop screenshots into that folder and swap the `src`
-values. `<Shot>` crops to the `ratio` you give it (default 4/3); pass
-`fit="contain"` for full UI screenshots you don't want cropped.
-*/}
-
 export const metadata = {
   slug: "vos",
   order: 3,
   title: "Vaault Of Scents",
-  subtitle: "A fragrance storefront built for conversion.",
+  subtitle:
+    "A full-stack headless commerce platform for premium fragrances — fast, secure and region-aware.",
   description:
-    "A direct-to-consumer fragrance storefront with a Razorpay checkout, built on Next.js for fast product browsing and a short path to purchase.",
+    "A full-stack headless e-commerce platform for discovering, purchasing, and managing premium fragrances through a fast, secure, and region-aware shopping experience.",
   client: "Vaault Of Scents",
   year: "2025",
-  role: "Full Stack",
-  tags: ["Next.js", "Razorpay", "E-commerce"],
+  role: "Full-Stack Software Engineer",
+  tags: ["Next.js", "Medusa.js", "Headless Commerce", "Full Stack"],
   heroImage: "/images/vos.jpg",
   coverImage: "/images/vos.jpg",
+  liveUrl: "https://test.vaaultofscents.com/in",
   stats: [
-    { label: "Duration", value: "—" },
-    { label: "Team size", value: "—" },
-    { label: "Payments", value: "Razorpay" },
-    { label: "Stack", value: "Next.js" },
+    { label: "Team size", value: "3" },
+    { label: "Duration", value: "6 wks" },
+    { label: "Applications", value: "3" },
+    { label: "Stack", value: "Next.js + Medusa.js" },
   ],
   review: {
     initials: "",
@@ -35,45 +25,251 @@ export const metadata = {
     role: "",
     text: "",
   },
-  draft: true,
 };
 
 <Section heading="Overview">
 
-Write the project overview here — what the store sells, who it serves, and what
-you were responsible for.
+Vaault Of Scents is a responsive fragrance e-commerce platform built around a
+headless commerce architecture. It combines a server-rendered Next.js
+storefront with a Medusa.js commerce backend, enabling independent control
+over the customer experience, product catalog, regional pricing, inventory,
+carts, payments, customers, orders and fulfillment operations.
+
+As a Full-Stack Software Engineer, I worked across the complete commerce
+lifecycle — from product discovery and variant selection to customer
+authentication, address management, checkout, payment processing and
+post-purchase communication. I also contributed to performance-oriented
+caching, SEO configuration, transactional email workflows, containerized
+deployment and production release automation.
 
 </Section>
 
 <Gallery layout="offset">
-  <Shot src="/images/vos.jpg" alt="Storefront homepage" ratio="3/4" />
-  <Shot src="/images/vos.jpg" alt="Product detail page" ratio="4/3" />
+  <Shot
+    src="/images/vos.jpg"
+    alt="Vaault Of Scents storefront homepage"
+    ratio="3/4"
+    caption="Storefront homepage"
+  />
+  <Shot
+    src="/images/vos.jpg"
+    alt="Vaault Of Scents product detail page"
+    ratio="4/3"
+    caption="Product detail — variants and regional pricing"
+  />
 </Gallery>
 
 <Section heading="The Challenge" layout="split">
 
-Describe the problem the build had to solve.
+The primary challenge was to deliver a visually refined storefront without
+compromising the reliability required by transactional commerce. The
+application needed to preserve customer and cart state across
+server-rendered routes, calculate products and shipping according to the
+active region, prevent incomplete checkout submissions, integrate an Indian
+payment gateway and keep cached storefront data synchronized with backend
+catalog changes.
 
-- First constraint.
-- Second constraint.
-- Third constraint.
+- **Maintaining state across the complete checkout journey:** guest carts, authenticated customers, saved addresses, shipping selections, promotions and payment sessions had to remain consistent across navigation, refreshes and login transitions.
+- **Coordinating payments, orders and fulfillment events:** Razorpay payment sessions, payment cancellation, failure handling, order completion and customer notifications needed to work as one dependable transaction flow.
+- **Balancing dynamic commerce with performance and SEO:** region-specific prices, inventory and product data had to remain current while product, category and collection pages remained fast, crawlable and correctly represented in search and social previews.
 
 </Section>
 
-<Section heading="Approach" layout="split">
+<Section heading="Architecture" layout="split">
 
-Describe the architecture and the decisions behind it — catalogue structure,
-checkout flow, and how the Razorpay integration was wired up.
+The presentation layer is built with the Next.js App Router, React and
+TypeScript. Server Components handle catalog and account data retrieval,
+while Server Actions manage mutations such as authentication, cart updates,
+address changes, promotions and order placement. A centralized Medusa SDK
+client injects locale information into requests and provides a consistent
+data-access layer between the storefront and commerce backend.
+
+Country-prefixed routes support region-aware browsing and checkout. Request
+middleware resolves the customer's market from the URL, deployment headers,
+configured defaults or available Medusa regions. Authentication tokens, cart
+identifiers, locale preferences and cache identifiers are managed through
+cookies — enabling persistent guest carts, authenticated sessions, cart
+transfer after login and region-specific product pricing without exposing
+sensitive tokens to client-side JavaScript.
+
+Medusa.js provides the commerce domain layer, backed by PostgreSQL as the
+system of record. It manages products, variants, price sets, inventory,
+regions, currencies, promotions, customers, addresses, carts, payment
+collections, orders, shipping and fulfillment. Redis supports the event bus,
+cache and workflow engine, allowing asynchronous commerce processes and
+cached data to operate efficiently across the backend.
 
 </Section>
 
 <Gallery layout="duo">
-  <Shot src="/images/booktkit.png" alt="Cart and checkout" ratio="4/3" />
-  <Shot src="/images/booktkit.png" alt="Razorpay payment step" ratio="4/3" />
+  <Shot
+    src="/images/vos.jpg"
+    alt="Vaault Of Scents region-aware catalog browsing"
+    ratio="4/3"
+    caption="Region-aware catalog and pricing"
+  />
+  <Shot
+    src="/images/vos.jpg"
+    alt="Vaault Of Scents cart and promotions"
+    ratio="4/3"
+    caption="Cart — promotions and free-shipping progress"
+  />
 </Gallery>
+
+<Section heading="Cart, Checkout & Payments" layout="split">
+
+The product experience supports region-calculated pricing, sale-price
+presentation, fragrance volume and concentration variants, variant-specific
+media, quantity selection, inventory validation, backorders, direct purchase
+and related-product recommendations. Customers can sort and paginate catalog
+results, browse collections and categories, share products through native
+sharing or social channels and receive clear feedback when a selection is
+unavailable.
+
+The cart layer supports line-item creation, quantity changes, deletion,
+automatic totals, multiple promotion codes and conditional free-shipping
+progress. Guest carts can be transferred to a customer after registration or
+login. Cache tags are invalidated after every relevant mutation so cart
+totals, fulfillment options and customer information remain synchronized
+without forcing broad application refreshes.
+
+Checkout is structured as a guarded address, delivery, payment and review
+sequence. It supports saved customer addresses, separate billing details,
+Indian state selection, flat or calculated shipping prices, delivery and
+pickup-compatible fulfillment options, promotion handling and
+payment-session initialization. Readiness checks prevent users from
+advancing until the required address, shipping and payment information is
+available.
+
+Razorpay is integrated through the Medusa payment provider and a dedicated
+storefront payment flow. The implementation initializes payment sessions,
+passes cart and customer details into Razorpay Checkout, handles
+cancellation and payment failures and completes the Medusa cart after
+successful authorization. Stripe Elements-compatible components are also
+present for card-payment support where a Stripe provider is enabled.
+
+</Section>
+
+<Gallery layout="duo">
+  <Shot
+    src="/images/vos.jpg"
+    alt="Vaault Of Scents checkout flow"
+    ratio="4/3"
+    caption="Guarded checkout — address, delivery, payment, review"
+  />
+  <Shot
+    src="/images/vos.jpg"
+    alt="Vaault Of Scents Razorpay payment step"
+    ratio="4/3"
+    caption="Razorpay payment session"
+  />
+</Gallery>
+
+<Section heading="Accounts & Orders" layout="split">
+
+The customer account area includes email-and-password registration, secure
+login, logout, profile completion, personal information management and
+saved address management. Customers can create, edit and remove addresses,
+maintain default billing or shipping information and access a dashboard
+containing recent orders and account status.
+
+The order experience provides order history, item-level details, totals,
+delivery information, payment information and fulfillment status. It also
+supports order-transfer requests with token-based acceptance or rejection
+flows. After checkout, customers receive a dedicated order-confirmation
+screen with purchased items, payment details, shipping information and the
+final order summary.
+
+Authentication and cart sessions are protected with HTTP-only cookies,
+strict same-site settings and production-only secure flags. The
+implementation also detects failed guest-cart transfers and provides a
+recovery action instead of silently losing the customer's cart.
+
+</Section>
+
+<Section heading="Notifications & Caching" layout="split">
+
+Backend subscribers react to customer registration, order placement,
+fulfillment creation, shipment creation and delivery events. Each event
+invokes a dedicated Medusa workflow that queries the required commerce data
+and sends a branded transactional email through the notification module and
+Nodemailer SMTP provider.
+
+The notification system covers welcome emails, order confirmations,
+fulfillment-ready updates, shipment notifications with tracking details and
+delivery confirmations. The contact form also sends the submitted inquiry to
+the business and dispatches an automatic acknowledgement to the customer.
+
+Catalog consistency is handled through event-driven cache revalidation.
+Product, variant and price events refresh storefront product data, while
+region and shipping-option events invalidate their related caches. Requests
+are sent through a secret-protected Next.js revalidation endpoint, providing
+targeted cache updates without rebuilding or clearing the entire storefront
+cache.
+
+</Section>
+
+<Section heading="SEO & Frontend" layout="split">
+
+The storefront includes page-level metadata for products, the catalog,
+categories, collections, accounts, contact pages, FAQs and commerce
+policies. Dynamic product metadata is generated directly from backend
+product data, including product names, descriptions and images.
+
+The SEO implementation includes canonical URLs, crawl directives, Open
+Graph metadata, Twitter cards, social preview images, sitemap configuration
+and robots rules. Checkout and account routes are excluded from indexing,
+while public product and store pages remain discoverable. Country-aware
+URLs and localized backend headers also provide a foundation for expanding
+the platform into additional markets and languages.
+
+The frontend uses responsive Tailwind CSS layouts, reusable commerce
+components, optimized font loading, skeleton states, Suspense boundaries,
+progressive navigation feedback and Next.js image rendering. Accessible UI
+primitives from Medusa UI, Headless UI and Radix UI are used for dialogs,
+accordions, selectors and payment controls. Extensive test identifiers make
+the core customer journeys suitable for integration and end-to-end
+automation.
+
+</Section>
+
+<Section heading="Infrastructure & Delivery" layout="split">
+
+Both applications use multi-stage Node.js 20 Alpine Docker images. The
+storefront is compiled as a standalone Next.js production server, while the
+backend produces an isolated Medusa server build. Docker Compose connects
+the storefront, backend and Redis services through a shared network and
+persists uploaded product media in a dedicated volume.
+
+Production deployment is automated through GitHub Actions. Publishing or
+editing a release triggers a secure SSH deployment that synchronizes the
+server with the main branch and rebuilds the application through Docker
+Compose. The backend includes Jest, SWC and the Medusa integration test
+runner, with an HTTP health check validating that the commerce server starts
+and responds correctly.
+
+This architecture keeps the customer-facing interface, commerce engine,
+cache infrastructure and deployment pipeline independently maintainable
+while preserving a consistent end-to-end shopping experience.
+
+</Section>
 
 <Section heading="Outcome">
 
-Describe what shipped and what it changed.
+The project delivered a release-ready full-stack commerce platform covering
+product discovery, regional pricing, variant selection, persistent carts,
+customer authentication, saved addresses, promotions, shipping, online
+payments, order management and automated lifecycle communication. Its
+modular Next.js and Medusa.js architecture provides a scalable foundation
+for expanding the product catalog, introducing new regions or payment
+providers and evolving the storefront without rebuilding the underlying
+commerce engine.
 
 </Section>
+
+<PullQuote attribution="Vaault Of Scents">
+
+Engineered the complete commerce journey — from product discovery to
+payment, fulfillment and customer retention.
+
+</PullQuote>

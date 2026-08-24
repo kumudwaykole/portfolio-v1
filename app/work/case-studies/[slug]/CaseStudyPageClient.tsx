@@ -2,7 +2,7 @@
 
 import { BackToTop } from "@/app/components/footer/back-to-top";
 import type { CaseStudyMetadata } from "@/app/work/types";
-import { IconArrowNarrowUp } from "@tabler/icons-react";
+import { IconArrowNarrowUp, IconArrowUpRight } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -72,6 +72,23 @@ function Hero({ metadata }: { metadata: CaseStudyMetadata }) {
             ))}
           </ul>
         </div>
+
+        {metadata.liveUrl ? (
+          <a
+            href={metadata.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="group mt-10 inline-flex min-h-16 items-center gap-3 bg-purple-500 px-8 text-sm font-bold uppercase tracking-[.08em] text-white transition hover:bg-purple-400 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300 sm:mt-14"
+          >
+            Visit website
+            <IconArrowUpRight
+              size={18}
+              stroke={2}
+              className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+              aria-hidden="true"
+            />
+          </a>
+        ) : null}
       </motion.div>
 
       {/* Full-bleed cover */}
@@ -190,6 +207,51 @@ function MoreProjects({ related }: { related: RelatedCaseStudy[] }) {
   );
 }
 
+/* ─── Floating visit-website bar ───────────────────────────────── */
+
+function VisitWebsiteBar({ metadata }: { metadata: CaseStudyMetadata }) {
+  if (!metadata.liveUrl) return null;
+
+  const initials = metadata.title
+    .split(/\s+/)
+    .map((word) => word[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.4, ease: EASE }}
+      className="pointer-events-none fixed inset-x-0 bottom-6 z-50 flex justify-center px-4"
+    >
+      <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-white/10 bg-black/80 p-2 pl-4 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl">
+        {/* <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white">
+          {initials}
+        </span> */}
+        <span className="hidden max-w-40 truncate text-sm font-semibold text-zinc-200 sm:inline">
+          {metadata.title}
+        </span>
+        <a
+          href={metadata.liveUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-black transition hover:bg-purple-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-300"
+        >
+          Visit website
+          <IconArrowUpRight
+            size={16}
+            stroke={2.25}
+            className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            aria-hidden="true"
+          />
+        </a>
+      </div>
+    </motion.div>
+  );
+}
+
 /* ─── Page shell ───────────────────────────────────────────────── */
 
 export function CaseStudyPageClient({
@@ -198,7 +260,10 @@ export function CaseStudyPageClient({
   children,
 }: CaseStudyPageClientProps) {
   return (
-    <div id="top" className="bg-[#0d0d0f] text-white">
+    <div
+      id="top"
+      className={`bg-[#0d0d0f] text-white ${metadata.liveUrl ? "pb-28" : ""}`}
+    >
       <Hero metadata={metadata} />
 
       <div className={`${SHELL} pt-24 sm:pt-32`}>
@@ -215,6 +280,8 @@ export function CaseStudyPageClient({
       </div>
 
       <MoreProjects related={related} />
+
+      <VisitWebsiteBar metadata={metadata} />
     </div>
   );
 }

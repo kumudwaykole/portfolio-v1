@@ -1,0 +1,179 @@
+export const metadata = {
+  slug: "vos-story",
+  order: 4,
+  title: "VOS Story",
+  subtitle:
+    "An immersive, scroll-driven GSAP story experience for Vaault Of Scents — cinematic motion design engineered into a working storefront.",
+  description:
+    "An interactive, cinematic web experience that transforms brand content into a scroll-driven visual journey using advanced motion design and responsive UI engineering.",
+  client: "Vaault Of Scents",
+  year: "2025",
+  role: "Lead Developer — UI/UX, Animation Architecture & Frontend",
+  tags: ["GSAP", "Next.js", "Interactive UI/UX", "Creative Frontend"],
+  heroImage: "/images/vos-story.webp",
+  coverImage: "/images/vos-story.webp",
+  liveUrl: "https://test.vaaultofscents.com/in/story",
+  stats: [
+    { label: "Role", value: "Lead Developer" },
+    { label: "Scenes", value: "3" },
+    { label: "Media assets", value: "12 videos · 19 images" },
+    { label: "Stack", value: "Next.js + GSAP" },
+  ],
+  review: {
+    initials: "",
+    name: "",
+    role: "",
+    text: "",
+  },
+};
+
+<Section heading="Overview">
+
+VOS Story is an interactive brand experience built into the Vaault Of Scents
+storefront — a three-scene, scroll-driven digital story rather than a
+conventional static page. I designed and built the whole thing myself: UI,
+UX, animation architecture and frontend implementation, on Next.js, React,
+TypeScript and Tailwind CSS, with GSAP, ScrollTrigger and MotionPathPlugin
+driving the motion.
+
+The interface is built to feel like an interactive film — typography, video,
+illustrations and motion all respond to the user's scroll position. A deep
+brown-black background, gold highlights, soft lighting, layered gradients
+and a pairing of Cinzel Decorative and Pridi typography establish a premium
+editorial style that stays consistent across every scene.
+
+[View the live experience →](https://test.vaaultofscents.com/in/story)
+
+</Section>
+
+<Gallery layout="offset">
+  <Shot
+    src="/images/vos-story.webp"
+    alt="VOS Story full-screen cinematic opening"
+    ratio="16/9"
+    caption="Full-screen opening — cinematic title treatment"
+  />
+  <Shot
+    src="/images/vos-story.webp"
+    alt="VOS Story typography and lighting detail"
+    ratio="3/4"
+    caption="Typography, gold highlights and layered gradients"
+  />
+</Gallery>
+
+<Section heading="GSAP Animation & Scroll Interaction" layout="split">
+
+The experience runs on reusable GSAP components rather than isolated
+animations. I built scroll-triggered text reveals, character-by-character
+luxury typography, directional fade transitions, animated information
+callouts, 3D coin flips and viewport-controlled video playback — with
+staggered sequencing, blur removal, perspective transforms and custom easing
+to keep every transition smooth and intentional.
+
+A custom SVG eclipse sequence uses GSAP's MotionPathPlugin to move glowing
+elements across orbital paths, adjusting its intensity for mobile and
+desktop and pausing automatically once it leaves the viewport.
+
+The final scene pins a horizontal-scroll sequence, translating vertical page
+movement into a run of full-screen content and video panels. ScrollTrigger
+calculates the exact track width, pins the scene, and recalculates on resize
+to keep the experience consistent across devices.
+
+</Section>
+
+<Gallery layout="duo">
+  <Shot
+    src="/images/vos-story.webp"
+    alt="VOS Story horizontal guardian sequence"
+    ratio="4/3"
+    caption="Pinned horizontal guardian sequence"
+  />
+  <Shot
+    src="/images/vos-story.webp"
+    alt="VOS Story animated SVG eclipse path"
+    ratio="4/3"
+    caption="Animated SVG eclipse — GSAP MotionPathPlugin"
+  />
+</Gallery>
+
+<Section heading="Interactive Components & Microinteractions" layout="split">
+
+The guardian cards use spring-based Motion values, 3D perspective,
+pointer-responsive rotation and dynamic glare gradients. Each card carries
+its own colour treatment while staying part of one cohesive component
+system, entering with a GSAP combination of opacity, vertical movement,
+scale, rotation and blur.
+
+Beyond the cards, the interface layers in three-directional image marquees,
+animated shine borders, responsive information markers, hover transitions,
+coin artwork, cinematic letterbox reveals and layered top, bottom and side
+gradients — the details that connect full-screen video to text sections
+without abrupt visual boundaries.
+
+The product cards at the close connect the experience back to commerce
+through direct product actions, turning an immersive UI into a functional
+customer journey.
+
+</Section>
+
+<Gallery layout="full">
+  <Shot
+    src="/images/vos-story.webp"
+    alt="VOS Story guardian card grid with 3D glare interaction"
+    ratio="16/9"
+    caption="Guardian card grid — 3D glare interaction"
+  />
+</Gallery>
+
+<Section heading="Responsive Design & Media Performance" layout="split">
+
+Layouts adapt across mobile, tablet and desktop — fluid typography,
+one-to-four-column card grids, device-specific video positioning and
+responsive gradient dimensions. Lenis handles smooth scrolling, while GSAP
+contexts and lifecycle cleanup keep animations from leaking between scenes.
+
+With 12 videos and 19 images to load, I built a custom preloading system:
+videos load sequentially so they don't overwhelm the network, images load in
+parallel, and Zustand tracks the global loading state behind a
+Motion-powered percentage loader.
+
+Videos play automatically on entering the viewport and pause on leaving it.
+The implementation also handles mobile autoplay restrictions, inline
+playback, failed-playback retries and interaction-gated unlocking. Heavy
+interactive components are dynamically loaded, and responsive image sizing
+with lazy loading keeps rendering work down.
+
+</Section>
+
+<Gallery layout="duo">
+  <Shot
+    src="/images/vos-story.webp"
+    alt="VOS Story loading screen"
+    ratio="4/3"
+    caption="Percentage loader ahead of the experience"
+  />
+  <Shot
+    src="/images/vos-story.webp"
+    alt="VOS Story on mobile"
+    ratio="4/3"
+    caption="Mobile version of the experience"
+  />
+</Gallery>
+
+<Section heading="Outcome">
+
+VOS Story is a distinctive creative frontend experience that pairs strong
+UI/UX direction with production-focused engineering. As lead developer, I
+owned the full implementation — visual composition, responsive layouts,
+GSAP timelines, interactive components, media orchestration and performance
+behaviour — turning a creative concept into a polished, scalable web
+experience.
+
+</Section>
+
+<PullQuote attribution="VOS Story — Vaault Of Scents">
+
+I turned scrolling into a cinematic interface — designed, animated and
+engineered from start to finish.
+
+</PullQuote>

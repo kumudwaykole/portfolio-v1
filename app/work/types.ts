@@ -30,6 +30,8 @@ export interface CaseStudyMetadata {
   review: ProjectReview;
   /** When true, the full write-up isn't ready yet — show the "still writing" notice. */
   draft?: boolean;
+  /** Live project URL. When set, shows a "Visit website" button and floating bar on the case study page. */
+  liveUrl?: string;
 }
 
 export interface CaseStudyEntry {
