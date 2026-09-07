@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useRef } from "react";
 
 const navigation = [
   { label: "About", href: "/#about" },
@@ -7,6 +10,11 @@ const navigation = [
 ] as const;
 
 export function Header() {
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+  const closeMenu = () => {
+    if (detailsRef.current) detailsRef.current.open = false;
+  };
+
   return (
     <header
       id="top"
@@ -49,8 +57,8 @@ export function Header() {
           Let&apos;s talk
         </button>
 
-        <details className="group relative md:hidden">
-          <summary className="flex size-10 cursor-pointer list-none items-center justify-center rounded-full border border-zinc-200 text-zinc-950 transition hover:bg-zinc-100 [&::-webkit-details-marker]:hidden dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-800">
+        <details ref={detailsRef} className="group relative md:hidden">
+          <summary className="flex size-10 cursor-pointer list-none items-center justify-center rounded-full border border-white/20 text-white transition hover:bg-white/10 [&::-webkit-details-marker]:hidden">
             <span className="sr-only">Toggle navigation</span>
             <svg
               className="size-5 group-open:hidden"
@@ -82,6 +90,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={closeMenu}
                 className="block rounded-xl px-4 py-3 text-sm font-semibold text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
               >
                 {item.label}
@@ -92,6 +101,7 @@ export function Header() {
               data-cal-link="kumud-waykole/15min"
               data-cal-namespace="15min"
               data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+              onClick={closeMenu}
               className="mt-1 block w-full rounded-xl bg-zinc-950 px-4 py-3 text-center text-sm font-semibold text-white dark:bg-white dark:text-zinc-950"
             >
               Let&apos;s talk
