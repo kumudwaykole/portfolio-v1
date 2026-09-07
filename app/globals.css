@@ -84,6 +84,7 @@ body {
 
 @theme {
   --animate-kite-float: kite-float 3.6s ease-in-out infinite;
+  --animate-marquee: marquee 36s linear infinite;
 }
 
 @keyframes kite-float {
@@ -95,6 +96,24 @@ body {
 
   50% {
     transform: translate3d(0, -12px, 0);
+  }
+}
+
+/* Track renders the item list twice back to back; translating exactly -50%
+   loops seamlessly regardless of how many items are in the list. */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
   }
 }
 

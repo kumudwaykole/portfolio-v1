@@ -24,7 +24,7 @@ const projects = [
   {
     title: "BookTkit",
     tags: ["Next.js", "Razorpay", "PostgreSQL"],
-    image: "/images/booktkit.png",
+    image: "/images/booktkit-platform.png",
     href: "/work/case-studies/booktkit",
   },
 ] as const;
@@ -33,7 +33,7 @@ export function Projects() {
   return (
     <section
       id="work"
-      className="relative overflow-hidden bg-[#08070a] px-5 py-24 text-white sm:px-8 sm:py-32"
+      className="relative overflow-hidden bg-[#08070a] px-5 py-24 text-white sm:px-8 sm:pt-15 sm:pb:32"
       aria-labelledby="projects-heading"
     >
       <div
