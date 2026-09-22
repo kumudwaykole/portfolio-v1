@@ -87,13 +87,24 @@ function ProjectRow({
   const href = `/work/case-studies/${project.slug}`;
   const right = index % 2 === 1;
 
+  // Shared with the image below so both the card's rise-and-fade and the
+  // image's zoom-settle come from a single observer instead of two.
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-18% 0px -18% 0px" });
+
   return (
     // The row box is transparent to the pointer so the strands behind it stay
     // hoverable; only the card itself takes events back.
     <div
       className={`pointer-events-none relative flex py-[9vh] sm:py-[12vh] ${right ? "justify-end" : "justify-start"}`}
     >
-      <Reveal className="pointer-events-auto relative w-full lg:w-[68%]">
+      <motion.div
+        ref={ref}
+        className="pointer-events-auto relative w-full lg:w-[68%]"
+        initial={{ opacity: 0, y: 26 }}
+        animate={inView ? { opacity: 1, y: 0 } : undefined}
+        transition={{ duration: 0.7, ease: EASE }}
+      >
         <article className="group relative">
           <StrandNode className="-top-2.5" />
 
@@ -103,13 +114,20 @@ function ProjectRow({
             className="block focus-visible:outline-2 focus-visible:outline-offset-6 focus-visible:outline-purple-300"
           >
             <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl border border-white/10 bg-black sm:aspect-16/11">
-              <Image
-                src={project.coverImage}
-                alt=""
-                fill
-                sizes="(max-width: 1024px) 100vw, 68vw"
-                className="object-cover saturate-[.85] transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:saturate-100"
-              />
+              <motion.div
+                className="absolute inset-0"
+                initial={{ scale: 1.2 }}
+                animate={inView ? { scale: 1 } : undefined}
+                transition={{ duration: 1.2, ease: EASE }}
+              >
+                <Image
+                  src={project.coverImage}
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 68vw"
+                  className="object-cover saturate-[.85] transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:saturate-100"
+                />
+              </motion.div>
               <div
                 className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10 transition-colors duration-500 group-hover:ring-purple-300/40"
                 aria-hidden="true"
@@ -158,7 +176,7 @@ function ProjectRow({
             </div>
           </div>
         </article>
-      </Reveal>
+      </motion.div>
     </div>
   );
 }
