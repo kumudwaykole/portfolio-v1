@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollReveal } from "../scroll-reveal";
 import { StackMarquee } from "./StackMarquee";
 
 const FOCUS_AREAS = [
@@ -41,9 +42,11 @@ export function About() {
       />
 
       <div className="relative mx-auto max-w-7xl">
-        <p className="mb-3 text-[10px] font-semibold uppercase tracking-[.3em] text-purple-300">
-          CORE STACK
-        </p>
+        <ScrollReveal>
+          <p className="mb-3 text-[10px] font-semibold uppercase tracking-[.3em] text-purple-300">
+            CORE STACK
+          </p>
+        </ScrollReveal>
 
         {/* <h2
           id="about-heading"
@@ -76,20 +79,22 @@ export function About() {
           </div>
 
           <div className="border border-white/10 bg-white/[.03] p-7 sm:p-9">
-            <p className="text-[10px] font-semibold uppercase tracking-[.28em] text-purple-300">
-              About me
-            </p>
-            <p className="mt-8 font-normal text-sm leading-7 text-zinc-400">
-              I&rsquo;m a Full Stack Developer with 3+ years of experience
-              building production-ready web applications, with a strong focus on
-              system design, backend architecture, database optimization, and
-              performance.
-            </p>
-            <p className="mt-5 font-normal text-sm leading-7 text-zinc-400">
-              I enjoy solving complex business problems and turning them into
-              scalable, reliable, and maintainable systems from development to
-              deployment.
-            </p>
+            <ScrollReveal>
+              <p className="text-[10px] font-semibold uppercase tracking-[.28em] text-purple-300">
+                About me
+              </p>
+              <p className="mt-8 font-normal text-sm leading-7 text-zinc-400">
+                I&rsquo;m a Full Stack Developer with 3+ years of experience
+                building production-ready web applications, with a strong focus
+                on system design, backend architecture, database optimization,
+                and performance.
+              </p>
+              <p className="mt-5 font-normal text-sm leading-7 text-zinc-400">
+                I enjoy solving complex business problems and turning them into
+                scalable, reliable, and maintainable systems from development to
+                deployment.
+              </p>
+            </ScrollReveal>
           </div>
 
           <div className="relative overflow-hidden border border-white/10 bg-white/[.03] p-7 sm:p-9">
@@ -106,40 +111,44 @@ export function About() {
               className="pointer-events-none absolute -right-2 -top-2 size-10 rounded-full bg-purple-400/25 blur-xl"
             />
 
-            <p className="relative text-[10px] font-semibold uppercase tracking-[.28em] text-purple-300">
-              Focus areas
-            </p>
-            <ul className="relative mt-8 flex flex-col gap-4">
-              {FOCUS_AREAS.map((area) => (
-                <li
-                  key={area}
-                  className="flex items-center gap-2.5 font-normal text-sm text-zinc-300"
-                >
-                  <ArrowIcon />
-                  {area}
-                </li>
-              ))}
-            </ul>
+            <ScrollReveal delay={100} className="relative">
+              <p className="text-[10px] font-semibold uppercase tracking-[.28em] text-purple-300">
+                Focus areas
+              </p>
+              <ul className="mt-8 flex flex-col gap-4">
+                {FOCUS_AREAS.map((area) => (
+                  <li
+                    key={area}
+                    className="flex items-center gap-2.5 font-normal text-sm text-zinc-300"
+                  >
+                    <ArrowIcon />
+                    {area}
+                  </li>
+                ))}
+              </ul>
 
-            <div className="relative mt-16 flex items-center gap-2  px-3 pt-2.5 text-xs text-zinc-400">
-              <span>
-                currently_at:{" "}
-                <span className="font-medium text-purple-300">
-                  SourceCatch Konnect
+              <div className="mt-16 flex items-center gap-2 px-3 pt-2.5 text-xs text-zinc-400">
+                <span>
+                  currently_at:{" "}
+                  <span className="font-medium text-purple-300">
+                    SourceCatch Konnect
+                  </span>
                 </span>
-              </span>
-            </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
 
-        <h3
-          id="experience"
-          className="mt-20 text-[clamp(2.6rem,9vw,6rem)] font-bold uppercase leading-[.85] tracking-[-.06em] sm:mt-28"
-        >
-          3+ YEARS
-          <br />
-          <span className="text-purple-400 tracking-wide "> OF Experience</span>
-        </h3>
+        <ScrollReveal>
+          <h3
+            id="experience"
+            className="mt-20 text-[clamp(2.6rem,9vw,6rem)] font-bold uppercase leading-[.85] tracking-[-.06em] sm:mt-28"
+          >
+            3+ YEARS
+            <br />
+            <span className="tracking-wide text-purple-400"> OF Experience</span>
+          </h3>
+        </ScrollReveal>
 
         <div className="mt-12 grid gap-6 border-t border-white/10 pt-8 sm:grid-cols-[auto_1fr] sm:items-start sm:gap-16"></div>
       </div>

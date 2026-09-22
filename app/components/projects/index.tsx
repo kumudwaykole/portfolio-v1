@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IconArrowNarrowUp } from "@tabler/icons-react";
+import { ScrollReveal } from "../scroll-reveal";
 
 const projects = [
   {
@@ -43,7 +44,7 @@ export function Projects() {
 
       <div className="relative mx-auto max-w-7xl">
         <div className="grid gap-6 border-b border-white/10 pb-10 lg:grid-cols-[1fr_1fr] lg:items-end">
-          <div>
+          <ScrollReveal>
             <p className="mb-3 text-[10px] font-semibold uppercase tracking-[.3em] text-purple-300">
               Selected work
             </p>
@@ -53,12 +54,14 @@ export function Projects() {
             >
               Real-World Software Projects
             </h2>
-          </div>
-          <p className="max-w-sm font-normal text-base leading-7 text-zinc-500 lg:justify-self-end">
-            Production-ready web applications and scalable software systems
-            built with React, Next.js, Node.js, TypeScript, PostgreSQL, and
-            Redis.
-          </p>
+          </ScrollReveal>
+          <ScrollReveal delay={100} className="lg:justify-self-end">
+            <p className="max-w-sm font-normal text-base leading-7 text-zinc-500">
+              Production-ready web applications and scalable software systems
+              built with React, Next.js, Node.js, TypeScript, PostgreSQL, and
+              Redis.
+            </p>
+          </ScrollReveal>
         </div>
 
         <div className="divide-y divide-white/10">
@@ -84,7 +87,7 @@ export function Projects() {
                 </div>
               </div>
 
-              <div className="relative z-10 grid min-h-36 items-center gap-x-4 gap-y-5 px-3 py-7 sm:min-h-40 sm:grid-cols-[2.5rem_minmax(0,1fr)_auto] sm:px-4 md:gap-x-7">
+              <ScrollReveal className="relative z-10 grid min-h-36 items-center gap-x-4 gap-y-5 px-3 py-7 sm:min-h-40 sm:grid-cols-[2.5rem_minmax(0,1fr)_auto] sm:px-4 md:gap-x-7">
                 <span className="self-start pt-2 text-[10px] text-zinc-500 sm:self-auto sm:pt-0">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -117,12 +120,12 @@ export function Projects() {
                     />
                   </Link>
                 </div>
-              </div>
+              </ScrollReveal>
             </article>
           ))}
         </div>
 
-        <div className="mt-14 flex justify-center sm:mt-16">
+        <ScrollReveal className="mt-14 flex justify-center sm:mt-16">
           <Link
             href="/work"
             className="group inline-flex min-h-12 items-center gap-2 rounded-full border border-white/20 bg-transparent px-7 text-sm font-semibold transition hover:border-purple-300 hover:bg-purple-500 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-purple-300"
@@ -135,7 +138,7 @@ export function Projects() {
               aria-hidden="true"
             />
           </Link>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

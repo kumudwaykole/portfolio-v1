@@ -1,6 +1,7 @@
 import { IconBrandGithub, IconBrandLinkedin } from "@tabler/icons-react";
 import { Globe } from "@/components/ui/globe";
 import { EncryptedText } from "@/components/ui/encrypted-text";
+import { ScrollReveal } from "../scroll-reveal";
 import { BackToTop } from "./back-to-top";
 const Arrow = () => (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-5">
@@ -26,7 +27,7 @@ export function Footer() {
       />
       <div className="relative mx-auto max-w-7xl px-5 pb-7 pt-20 sm:px-8 sm:pt-28 lg:px-12">
         <div className="grid items-end gap-10 lg:grid-cols-[.95fr_1.05fr] lg:gap-16">
-          <div>
+          <ScrollReveal>
             <span className="mb-5 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[.32em] text-purple-300">
               <span className="size-1.5 rotate-45 bg-purple-400" /> Have project
               in mind ?
@@ -36,7 +37,7 @@ export function Footer() {
               <br />
               <span className="text-outline">touch</span>
             </h2>
-          </div>
+          </ScrollReveal>
           <div className="group relative h-74 overflow-hidden border border-purple-300/35 bg-black transition-colors duration-300 hover:border-purple-300/55 sm:h-90">
             <div className="pointer-events-none absolute inset-x-0 top-6 z-10 text-center text-sm font-semibold tracking-wide text-zinc-100 sm:top-5 sm:text-xl">
               <p className="italic">Let&apos;s Build together</p>
@@ -49,7 +50,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-7 border-y border-white/10 py-4 sm:grid-cols-[1fr_auto] sm:items-end">
+        <ScrollReveal className="mt-10 grid gap-7 border-y border-white/10 py-4 sm:grid-cols-[1fr_auto] sm:items-end">
           <a href="mailto:kumudwaykole1@gmail.com" className="group w-fit">
             <span className="block text-xs font-semibold uppercase tracking-[.24em] text-zinc-500">
               Email
@@ -79,9 +80,9 @@ export function Footer() {
               <EncryptedText text="/kumud-waykole" trigger="hover" />
             </a>
           </div>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid items-center gap-8 py-10 md:grid-cols-[auto_1fr]">
+        <ScrollReveal className="grid items-center gap-8 py-10 md:grid-cols-[auto_1fr]">
           <button
             type="button"
             data-cal-link="kumud-waykole/15min"
@@ -94,7 +95,7 @@ export function Footer() {
           <p className="select-none text-right text-[clamp(3rem,8vw,7rem)] font-black leading-none tracking-[-.07em] text-white/[.07]">
             KUMUD.W
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="flex flex-col gap-4 border-t border-white/5 pt-6 text-[10px] font-semibold uppercase tracking-[.12em] text-zinc-600 sm:flex-row sm:items-center sm:justify-between">
           <p>
