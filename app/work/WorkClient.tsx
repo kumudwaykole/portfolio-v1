@@ -16,7 +16,7 @@ function StrandNode({ className }: { className?: string }) {
     <span
       data-strand-node
       aria-hidden="true"
-      className={`pointer-events-none absolute left-1/2 block size-1.5 -translate-x-1/2 rounded-full bg-purple-300 shadow-[0_0_12px_3px_rgb(168_85_247/.45)] ${className ?? ""}`}
+      className={`pointer-events-none absolute left-1/2 -ml-0.75 block size-1.5 rounded-full bg-purple-300 shadow-[0_0_12px_3px_rgb(168_85_247/.45)] ${className ?? ""}`}
     />
   );
 }

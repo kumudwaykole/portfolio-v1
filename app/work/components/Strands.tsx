@@ -28,6 +28,23 @@ const DRAW_HEAD = 0.78;
 
 type Point = { x: number; y: number };
 
+/**
+ * Centre of `node` relative to `container`, from layout offsets rather than
+ * `getBoundingClientRect()` — nodes sit inside scroll-reveal animations, so a
+ * rect taken mid-animation includes the transform and lands off the dot.
+ */
+function layoutCenter(node: HTMLElement, container: HTMLElement): Point {
+  let x = node.offsetWidth / 2;
+  let y = node.offsetHeight / 2;
+  let el: HTMLElement | null = node;
+  while (el && el !== container) {
+    x += el.offsetLeft;
+    y += el.offsetTop;
+    el = el.offsetParent as HTMLElement | null;
+  }
+  return { x, y };
+}
+
 function buildPath(points: Point[], factor: number, spread: number): string {
   if (points.length < 2) return "";
 
@@ -97,7 +114,6 @@ export function Strands({ containerRef, className }: StrandsProps) {
     const container = containerRef.current;
     if (!container) return;
 
-    const rect = container.getBoundingClientRect();
     const width = container.clientWidth;
     const height = container.clientHeight;
     if (!width || !height) return;
@@ -109,11 +125,7 @@ export function Strands({ containerRef, className }: StrandsProps) {
     // Enter at the top centre, pass through every node, exit at the bottom.
     const points: Point[] = [{ x: width / 2, y: 0 }];
     for (const node of nodes) {
-      const nodeRect = node.getBoundingClientRect();
-      points.push({
-        x: nodeRect.left + nodeRect.width / 2 - rect.left,
-        y: nodeRect.top + nodeRect.height / 2 - rect.top,
-      });
+      points.push(layoutCenter(node, container));
     }
     points.push({ x: width / 2, y: height });
 
@@ -198,6 +210,9 @@ export function Strands({ containerRef, className }: StrandsProps) {
     motionQuery.addEventListener("change", onMotionChange);
 
     measure();
+
+    // The first measure can run against fallback-font metrics (`display: swap`).
+    document.fonts?.ready.then(measure);
 
     // Only observe scroll while the section is actually on screen.
     const observer = new IntersectionObserver(
