@@ -1,6 +1,6 @@
 "use client";
 
-import { RevealBlock } from "@/app/work/case-studies/[slug]/RevealBlock";
+import { ScrollReveal } from "@/app/components/scroll-reveal";
 import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 
@@ -42,11 +42,11 @@ export function Section({
         isGrid ? "md:grid md:grid-cols-12 md:gap-x-8" : ""
       }`}
     >
-      {/* The column span has to sit on the outermost element — RevealBlock's
+      {/* The column span has to sit on the outermost element — ScrollReveal's
           own wrapper is what becomes the grid item, not the heading inside it. */}
       {heading ? (
         <div className={isGrid ? "md:col-span-4" : ""}>
-          <RevealBlock>
+          <ScrollReveal>
             <h2
               className={`mb-7 text-[clamp(1.9rem,4.4vw,3.15rem)] font-bold leading-[1.05] tracking-[-.035em] text-white ${
                 isGrid ? "md:mb-0" : ""
@@ -54,7 +54,7 @@ export function Section({
             >
               {heading}
             </h2>
-          </RevealBlock>
+          </ScrollReveal>
         </div>
       ) : null}
 
@@ -67,11 +67,11 @@ export function Section({
 
 export function Prose({ children }: { children: ReactNode }) {
   return (
-    <RevealBlock>
+    <ScrollReveal>
       <p className="mb-6 font-normal text-[15px] leading-[1.7] text-zinc-400 last:mb-0 sm:text-[16.5px]">
         {children}
       </p>
-    </RevealBlock>
+    </ScrollReveal>
   );
 }
 
@@ -156,7 +156,7 @@ export function Shot({
   const sizes = "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px";
 
   return (
-    <RevealBlock>
+    <ScrollReveal>
       <figure className="m-0">
         <div
           className="relative w-full overflow-hidden bg-[#0f0f11]"
@@ -190,7 +190,7 @@ export function Shot({
           </figcaption>
         ) : null}
       </figure>
-    </RevealBlock>
+    </ScrollReveal>
   );
 }
 
@@ -204,7 +204,7 @@ export function PullQuote({
   attribution?: string;
 }) {
   return (
-    <RevealBlock>
+    <ScrollReveal>
       <figure className="mx-auto my-24 max-w-4xl text-center sm:my-32">
         <blockquote className="text-[clamp(1.35rem,3.2vw,2.25rem)] font-normal leading-[1.25] tracking-[-.03em] text-white [&_p]:m-0">
           {children}
@@ -215,7 +215,7 @@ export function PullQuote({
           </figcaption>
         ) : null}
       </figure>
-    </RevealBlock>
+    </ScrollReveal>
   );
 }
 
@@ -229,7 +229,7 @@ export function FactList({ children }: { children: ReactNode }) {
 
 export function Fact({ children }: { children: ReactNode }) {
   return (
-    <RevealBlock>
+    <ScrollReveal>
       <li className="flex gap-4 font-normal text-[15px] leading-[1.7] text-zinc-400 sm:text-[16.5px]">
         <span
           className="mt-[.7em] block size-[3px] shrink-0 bg-purple-400"
@@ -237,6 +237,6 @@ export function Fact({ children }: { children: ReactNode }) {
         />
         <span>{children}</span>
       </li>
-    </RevealBlock>
+    </ScrollReveal>
   );
 }

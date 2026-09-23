@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ScrollReveal } from "../scroll-reveal";
 import Threads from "./Threads";
 
 export default function HeroSection() {
@@ -13,14 +12,16 @@ export default function HeroSection() {
       </div>
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,rgba(116,42,168,0.12),transparent_48%)]" />
 
+      {/* Entrance is CSS-only (animate-fade-up) rather than ScrollReveal: this
+          is the LCP content, so it must paint with the HTML, not after hydration. */}
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-center text-center">
-        <ScrollReveal>
+        <div className="animate-fade-up">
           <p className="mb-7 text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-fuchsia-200 sm:text-xs">
             Hi.. i&apos;m Kumud Waykole
           </p>
-        </ScrollReveal>
+        </div>
 
-        <ScrollReveal delay={100}>
+        <div className="animate-fade-up delay-100">
           <h1
             id="hero-heading"
             className="max-w-4xl text-balance text-[clamp(2.75rem,7vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.055em]"
@@ -30,9 +31,9 @@ export default function HeroSection() {
               Software Engineer
             </span>
           </h1>
-        </ScrollReveal>
+        </div>
 
-        <ScrollReveal delay={200} className="flex flex-col items-center">
+        <div className="flex animate-fade-up flex-col items-center delay-200">
           <p className="mt-7 max-w-2xl font-normal text-pretty text-base leading-7 text-zinc-400 sm:mt-9 sm:text-lg sm:leading-8">
             Specializing in React, Next.js, Node.js, TypeScript, and scalable
             system design, building secure, high-performance web applications
@@ -43,7 +44,7 @@ export default function HeroSection() {
             View Recent Projects
           <span aria-hidden="true" className="text-lg transition-transform group-hover:translate-y-1">↓</span>
           </Link>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   );

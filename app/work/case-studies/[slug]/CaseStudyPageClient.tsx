@@ -3,12 +3,9 @@
 import { BackToTop } from "@/app/components/footer/back-to-top";
 import type { CaseStudyMetadata } from "@/app/work/types";
 import { IconArrowNarrowUp, IconArrowUpRight } from "@tabler/icons-react";
-import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 /** Shared page gutter. The hero image deliberately sits outside of it. */
 const SHELL = "mx-auto w-full max-w-[88rem] px-6 sm:px-10 lg:px-16";
@@ -31,12 +28,9 @@ interface CaseStudyPageClientProps {
 function Hero({ metadata }: { metadata: CaseStudyMetadata }) {
   return (
     <header>
-      <motion.div
-        initial={{ opacity: 0, y: 18 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: EASE }}
-        className={`${SHELL} pb-14 pt-28 sm:pb-20 sm:pt-36`}
-      >
+      {/* Hero entrances are CSS-only (animate-fade-*), so the title and cover
+          paint with the HTML instead of waiting for hydration. */}
+      <div className={`${SHELL} animate-fade-up pb-14 pt-28 sm:pb-20 sm:pt-36`}>
         <Link
           href="/work"
           className="group mb-12 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[.22em] text-zinc-500 transition-colors hover:text-white"
@@ -89,15 +83,10 @@ function Hero({ metadata }: { metadata: CaseStudyMetadata }) {
             />
           </a>
         ) : null}
-      </motion.div>
+      </div>
 
       {/* Full-bleed cover */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
-        className="relative h-[46vh] min-h-[280px] w-full overflow-hidden bg-[#0f0f11] sm:h-[68vh] sm:min-h-[440px]"
-      >
+      <div className="relative h-[46vh] min-h-[280px] w-full animate-fade-in overflow-hidden bg-[#0f0f11] delay-100 sm:h-[68vh] sm:min-h-[440px]">
         <Image
           src={metadata.heroImage}
           alt={`${metadata.title} case study cover`}
@@ -106,7 +95,7 @@ function Hero({ metadata }: { metadata: CaseStudyMetadata }) {
           sizes="100vw"
           className="object-cover"
         />
-      </motion.div>
+      </div>
 
       {/* Project facts */}
       <dl
@@ -220,12 +209,7 @@ function VisitWebsiteBar({ metadata }: { metadata: CaseStudyMetadata }) {
     .toUpperCase();
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.4, ease: EASE }}
-      className="pointer-events-none fixed inset-x-0 bottom-6 z-50 flex justify-center px-4"
-    >
+    <div className="pointer-events-none fixed inset-x-0 bottom-6 z-50 flex animate-fade-up justify-center px-4 delay-400">
       <div className="pointer-events-auto flex items-center gap-3 rounded-full border border-white/10 bg-black/80 p-2 pl-4 shadow-[0_8px_32px_rgba(0,0,0,0.5)] backdrop-blur-xl">
         {/* <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white">
           {initials}
@@ -248,7 +232,7 @@ function VisitWebsiteBar({ metadata }: { metadata: CaseStudyMetadata }) {
           />
         </a>
       </div>
-    </motion.div>
+    </div>
   );
 }
 

@@ -1,14 +1,12 @@
 "use client";
 
+import { ScrollReveal } from "@/app/components/scroll-reveal";
 import { Strands } from "@/app/work/components/Strands";
 import type { ProjectMeta } from "@/app/work/types";
 import { EncryptedText } from "@/components/ui/encrypted-text";
-import { motion, useInView } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, type ReactNode } from "react";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
+import { useRef } from "react";
 
 /** A strand junction. The strands pinch together here, and the dot marks it. */
 function StrandNode({ className }: { className?: string }) {
@@ -21,41 +19,12 @@ function StrandNode({ className }: { className?: string }) {
   );
 }
 
-/* ─── Reveal-on-scroll wrapper ─────────────────────────────────── */
-function Reveal({
-  children,
-  className,
-  delay = 0,
-}: {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-18% 0px -18% 0px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 26 }}
-      animate={inView ? { opacity: 1, y: 0 } : undefined}
-      transition={{ duration: 0.7, delay, ease: EASE }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
 /* ─── Hero ─────────────────────────────────────────────────────── */
 function Hero({ projectCount }: { projectCount: number }) {
   return (
     <section className="relative px-5 pb-10 pt-28 text-center sm:px-8 sm:pt-36">
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: EASE }}
-      >
+      {/* CSS-only entrance so the heading paints with the HTML, not after hydration. */}
+      <div className="animate-fade-up">
         <span className="mb-7 inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[.32em] text-purple-300">
           <span className="size-1.5 rotate-45 bg-purple-400" /> The archive
         </span>
@@ -71,7 +40,7 @@ function Hero({ projectCount }: { projectCount: number }) {
           A curated showcase of platforms, storefronts and internal tools —
           written up end to end, from constraint to shipped product.
         </p>
-      </motion.div>
+      </div>
     </section>
   );
 }
@@ -87,24 +56,15 @@ function ProjectRow({
   const href = `/work/case-studies/${project.slug}`;
   const right = index % 2 === 1;
 
-  // Shared with the image below so both the card's rise-and-fade and the
-  // image's zoom-settle come from a single observer instead of two.
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-18% 0px -18% 0px" });
-
   return (
     // The row box is transparent to the pointer so the strands behind it stay
     // hoverable; only the card itself takes events back.
     <div
       className={`pointer-events-none relative flex py-[9vh] sm:py-[12vh] ${right ? "justify-end" : "justify-start"}`}
     >
-      <motion.div
-        ref={ref}
-        className="pointer-events-auto relative w-full lg:w-[68%]"
-        initial={{ opacity: 0, y: 26 }}
-        animate={inView ? { opacity: 1, y: 0 } : undefined}
-        transition={{ duration: 0.7, ease: EASE }}
-      >
+      {/* `group/reveal` lets the image's zoom-settle key off the same
+          data-revealed flag as the card's rise-and-fade — one observer. */}
+      <ScrollReveal className="group/reveal pointer-events-auto relative w-full lg:w-[68%]">
         <article className="group relative">
           <StrandNode className="-top-2.5" />
 
@@ -114,12 +74,7 @@ function ProjectRow({
             className="block focus-visible:outline-2 focus-visible:outline-offset-6 focus-visible:outline-purple-300"
           >
             <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl border border-white/10 bg-black sm:aspect-16/11">
-              <motion.div
-                className="absolute inset-0"
-                initial={{ scale: 1.2 }}
-                animate={inView ? { scale: 1 } : undefined}
-                transition={{ duration: 1.2, ease: EASE }}
-              >
+              <div className="absolute inset-0 scale-[1.2] transition-[scale] duration-[1200ms] ease-[cubic-bezier(.22,1,.36,1)] group-data-[revealed=true]/reveal:scale-100 motion-reduce:scale-100 motion-reduce:transition-none">
                 <Image
                   src={project.coverImage}
                   alt=""
@@ -127,7 +82,7 @@ function ProjectRow({
                   sizes="(max-width: 1024px) 100vw, 68vw"
                   className="object-cover saturate-[.85] transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:saturate-100"
                 />
-              </motion.div>
+              </div>
               <div
                 className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10 transition-colors duration-500 group-hover:ring-purple-300/40"
                 aria-hidden="true"
@@ -176,7 +131,7 @@ function ProjectRow({
             </div>
           </div>
         </article>
-      </motion.div>
+      </ScrollReveal>
     </div>
   );
 }
@@ -186,7 +141,7 @@ function ClosingCta() {
   return (
     <div className="pointer-events-none relative pb-24 pt-[10vh] text-center">
       <StrandNode className="top-0" />
-      <Reveal className="pointer-events-auto">
+      <ScrollReveal className="pointer-events-auto">
         <p className="text-[10px] font-semibold uppercase tracking-[.32em] text-purple-300">
           Next chapter
         </p>
@@ -215,7 +170,7 @@ function ClosingCta() {
             />
           </svg>
         </Link>
-      </Reveal>
+      </ScrollReveal>
     </div>
   );
 }

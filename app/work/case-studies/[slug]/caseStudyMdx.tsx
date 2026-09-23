@@ -1,3 +1,4 @@
+import { ScrollReveal } from "@/app/components/scroll-reveal";
 import {
   Fact,
   FactList,
@@ -7,7 +8,6 @@ import {
   Section,
   Shot,
 } from "@/app/work/case-studies/[slug]/CaseStudyBlocks";
-import { RevealBlock } from "@/app/work/case-studies/[slug]/RevealBlock";
 import type { MDXComponents } from "mdx/types";
 import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
@@ -20,21 +20,21 @@ import type { ComponentPropsWithoutRef } from "react";
 
 function HeadingTwo({ children }: ComponentPropsWithoutRef<"h2">) {
   return (
-    <RevealBlock>
+    <ScrollReveal>
       <h2 className="mt-24 mb-7 text-[clamp(1.9rem,4.4vw,3.15rem)] font-bold leading-[1.05] tracking-[-.035em] text-white first:mt-0 sm:mt-32">
         {children}
       </h2>
-    </RevealBlock>
+    </ScrollReveal>
   );
 }
 
 function HeadingThree({ children }: ComponentPropsWithoutRef<"h3">) {
   return (
-    <RevealBlock>
+    <ScrollReveal>
       <h3 className="mt-12 mb-4 text-[10px] font-bold uppercase tracking-[.24em] text-purple-300">
         {children}
       </h3>
-    </RevealBlock>
+    </ScrollReveal>
   );
 }
 

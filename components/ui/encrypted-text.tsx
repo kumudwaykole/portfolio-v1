@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "motion/react";
 import { cn } from "@/lib/utils";
 
 type EncryptedTextProps = {
@@ -28,6 +27,12 @@ type EncryptedTextProps = {
    * re-scrambles on mouse leave, so it can replay every time.
    */
   trigger?: "view" | "hover";
+};
+
+/** One animation frame: how many real characters show, and the gibberish for the rest. */
+type ScrambleFrame = {
+  revealCount: number;
+  chars: string[];
 };
 
 const DEFAULT_CHARSET =
@@ -62,90 +67,91 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
   trigger = "view",
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true });
+  const [isInView, setIsInView] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const isActive = trigger === "hover" ? isHovered : isInView;
 
-  const [revealCount, setRevealCount] = useState<number>(0);
-  const animationFrameRef = useRef<number | null>(null);
-  const startTimeRef = useRef<number>(0);
-  const lastFlipTimeRef = useRef<number>(0);
   // Seeded with the plain text (not random gibberish) so the server-rendered
   // markup and the client's pre-hydration render match exactly. Math.random()
   // would otherwise pick different characters on the server vs. the client,
   // causing a hydration mismatch. Real scrambling only starts client-side,
-  // inside the effect below.
-  const scrambleCharsRef = useRef<string[]>(text ? text.split("") : []);
+  // from the animation frame callback below.
+  const [frame, setFrame] = useState<ScrambleFrame>(() => ({
+    revealCount: 0,
+    chars: text ? text.split("") : [],
+  }));
 
+  // Only the "view" trigger needs to watch visibility; reveals once.
   useEffect(() => {
-    if (!isActive) {
-      if (trigger === "hover") {
-        // Idle state for hover-triggered text is the plain, unscrambled text.
-        setRevealCount(text.length);
-      }
-      return;
-    }
+    if (trigger !== "view") return;
+    const element = ref.current;
+    if (!element) return;
 
-    // Reset state for a fresh animation whenever dependencies change
-    const initial = text
-      ? generateGibberishPreservingSpaces(text, charset)
-      : "";
-    scrambleCharsRef.current = initial.split("");
-    startTimeRef.current = performance.now();
-    lastFlipTimeRef.current = startTimeRef.current;
-    setRevealCount(0);
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setIsInView(true);
+      observer.disconnect();
+    });
+    observer.observe(element);
 
-    let isCancelled = false;
+    return () => observer.disconnect();
+  }, [trigger]);
+
+  // A fresh run starts every time the text becomes active. State is only set
+  // from the rAF callback, so the first frame (elapsed ≈ 0) resets the reveal.
+  useEffect(() => {
+    if (!isActive || !text) return;
+
+    const totalLength = text.length;
+    const startTime = performance.now();
+    let lastFlipTime = startTime;
+    let chars = generateGibberishPreservingSpaces(text, charset).split("");
+    let animationFrame = 0;
 
     const update = (now: number) => {
-      if (isCancelled) return;
-
-      const elapsedMs = now - startTimeRef.current;
-      const totalLength = text.length;
-      const currentRevealCount = Math.min(
+      const revealCount = Math.min(
         totalLength,
-        Math.floor(elapsedMs / Math.max(1, revealDelayMs)),
+        Math.floor((now - startTime) / Math.max(1, revealDelayMs)),
       );
 
-      setRevealCount(currentRevealCount);
-
-      if (currentRevealCount >= totalLength) {
-        return;
-      }
-
       // Re-randomize unrevealed scramble characters on an interval
-      const timeSinceLastFlip = now - lastFlipTimeRef.current;
-      if (timeSinceLastFlip >= Math.max(0, flipDelayMs)) {
-        for (let index = 0; index < totalLength; index += 1) {
-          if (index >= currentRevealCount) {
-            if (text[index] !== " ") {
-              scrambleCharsRef.current[index] =
-                generateRandomCharacter(charset);
-            } else {
-              scrambleCharsRef.current[index] = " ";
-            }
-          }
-        }
-        lastFlipTimeRef.current = now;
+      if (
+        revealCount < totalLength &&
+        now - lastFlipTime >= Math.max(0, flipDelayMs)
+      ) {
+        chars = chars.map((char, index) =>
+          index < revealCount || text[index] === " "
+            ? char
+            : generateRandomCharacter(charset),
+        );
+        lastFlipTime = now;
       }
 
-      animationFrameRef.current = requestAnimationFrame(update);
-    };
+      // Bail out when nothing changed so idle frames don't re-render.
+      setFrame((previous) =>
+        previous.revealCount === revealCount && previous.chars === chars
+          ? previous
+          : { revealCount, chars },
+      );
 
-    animationFrameRef.current = requestAnimationFrame(update);
-
-    return () => {
-      isCancelled = true;
-      if (animationFrameRef.current !== null) {
-        cancelAnimationFrame(animationFrameRef.current);
+      if (revealCount < totalLength) {
+        animationFrame = requestAnimationFrame(update);
       }
     };
-  }, [isActive, text, revealDelayMs, charset, flipDelayMs, trigger]);
+
+    animationFrame = requestAnimationFrame(update);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isActive, text, revealDelayMs, charset, flipDelayMs]);
 
   if (!text) return null;
 
+  // Hover-triggered text idles as the plain, fully revealed text.
+  const revealCount =
+    trigger === "hover" && !isActive ? text.length : frame.revealCount;
+
   return (
-    <motion.span
+    <span
       ref={ref}
       className={cn(className)}
       aria-label={text}
@@ -155,12 +161,7 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
     >
       {text.split("").map((char, index) => {
         const isRevealed = index < revealCount;
-        const displayChar = isRevealed
-          ? char
-          : char === " "
-            ? " "
-            : (scrambleCharsRef.current[index] ??
-              generateRandomCharacter(charset));
+        const displayChar = isRevealed ? char : (frame.chars[index] ?? char);
 
         return (
           <span
@@ -171,6 +172,6 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
           </span>
         );
       })}
-    </motion.span>
+    </span>
   );
 };

@@ -71,9 +71,12 @@ export function Projects() {
               className="group relative min-h-36 bg-transparent sm:min-h-40"
             >
               {/* Floats over the middle of the row, nudged down from center, like a kite
-                                drifting in — pointer-events-none so it never blocks the CTA underneath. */}
+                                drifting in — pointer-events-none so it never blocks the CTA underneath.
+                  Hover-only, so it's display:none on touch devices: a lazy image that
+                  never renders is never downloaded. Low fetch priority on desktop, as
+                  it's only revealed on interaction. */}
               <div
-                className="pointer-events-none absolute inset-0 z-20 flex translate-x-12 translate-y-6 items-center justify-center opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-within:opacity-100 sm:translate-x-20"
+                className="pointer-events-none absolute inset-0 z-20 hidden translate-x-12 translate-y-6 items-center justify-center opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100 group-focus-within:opacity-100 sm:translate-x-20 [@media(hover:hover)_and_(pointer:fine)]:flex"
                 aria-hidden="true"
               >
                 <div className="relative aspect-4/3 w-56 overflow-hidden rounded-2xl shadow-2xl shadow-black/60 ring-1 ring-white/10 group-hover:animate-kite-float group-focus-within:animate-kite-float sm:w-80">
@@ -82,6 +85,7 @@ export function Projects() {
                     alt=""
                     fill
                     sizes="(max-width: 640px) 224px, 320px"
+                    fetchPriority="low"
                     className="scale-110 object-cover object-center transition-transform duration-700 group-hover:scale-100 group-focus-within:scale-100"
                   />
                 </div>

@@ -83,7 +83,7 @@ export function Header() {
           </summary>
 
           <nav
-            className="absolute right-0 top-13 w-56 rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl shadow-zinc-950/10 dark:border-zinc-800 dark:bg-zinc-900"
+            className="absolute right-0 top-13 w-56 rounded-2xl border border-zinc-200 bg-white p-2 shadow-xl shadow-zinc-950/10"
             aria-label="Mobile navigation"
           >
             {navigation.map((item) => (
@@ -91,7 +91,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={closeMenu}
-                className="block rounded-xl px-4 py-3 text-sm font-semibold text-zinc-700 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                className="block rounded-xl px-4 py-3 text-sm font-semibold text-zinc-700 hover:bg-zinc-100"
               >
                 {item.label}
               </Link>
@@ -102,7 +102,7 @@ export function Header() {
               data-cal-namespace="15min"
               data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
               onClick={closeMenu}
-              className="mt-1 block w-full rounded-xl bg-zinc-950 px-4 py-3 text-center text-sm font-semibold text-white dark:bg-white dark:text-zinc-950"
+              className="mt-1 block w-full rounded-xl bg-zinc-950 px-4 py-3 text-center text-sm font-semibold text-white"
             >
               Let&apos;s talk
             </button>
