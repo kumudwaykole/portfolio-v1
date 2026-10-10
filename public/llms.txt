@@ -1,0 +1,34 @@
+# Kumud Waykole
+
+> Kumud Waykole is a Full Stack Software Developer with 3+ years of experience building production web applications with React, Next.js, Node.js, TypeScript and PostgreSQL. Focus areas: system design, database architecture, performance optimization and DevOps. Currently at SourceCatch Konnect.
+
+## Role
+
+Software Engineer / Full Stack Software Developer (frontend, backend, database and deployment), 3+ years of experience.
+
+## Technical skills
+
+- Frontend: React, Next.js, TypeScript, JavaScript, Tailwind CSS, GSAP
+- Backend: Node.js, Express, REST APIs, Medusa.js, Zod
+- Databases & ORM: PostgreSQL, Prisma, Redis
+- Payments: Razorpay, Stripe
+- DevOps & tooling: Docker, GitHub Actions, CI/CD, Turborepo, Git, pnpm, Vercel, Jest
+- Architecture: System design, software architecture, database optimization, performance optimization, monorepo architecture
+
+## Pages
+
+- [Home](https://ikumud.com/): Overview, core stack and contact.
+- [Selected Work](https://ikumud.com/work): Index of full stack case studies (ERP systems, service marketplaces, e-commerce checkouts).
+
+## Case studies
+
+- [BMS Platform](https://ikumud.com/work/case-studies/bms-platform)
+- [ERP](https://ikumud.com/work/case-studies/erp)
+- [VOS](https://ikumud.com/work/case-studies/vos)
+- [VOS Story](https://ikumud.com/work/case-studies/vos-story)
+- [BookTkit](https://ikumud.com/work/case-studies/booktkit)
+
+## Contact
+
+- GitHub: https://github.com/kumudwaykole
+- LinkedIn: https://www.linkedin.com/in/kumud-waykole

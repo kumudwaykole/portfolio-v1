@@ -2,6 +2,7 @@ import { Footer } from "@/app/components/footer";
 import { caseStudyMDXComponents } from "@/app/work/case-studies/[slug]/caseStudyMdx";
 import { CaseStudyPageClient } from "@/app/work/case-studies/[slug]/CaseStudyPageClient";
 import { getAllCaseStudies, getCaseStudyBySlug } from "@/content/case-studies";
+import { jsonLd, PERSON_ID, SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -95,9 +96,55 @@ export default async function CaseStudyPage({ params }: PageProps) {
     }));
 
   const { Content } = caseStudy;
+  const { metadata } = caseStudy;
+  const url = `${SITE_URL}/work/case-studies/${metadata.slug}`;
+  const image = metadata.coverImage || metadata.heroImage;
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${url}#article`,
+        headline: `${metadata.title} Case Study`,
+        description: metadata.description,
+        image: `${SITE_URL}${image}`,
+        url,
+        mainEntityOfPage: url,
+        datePublished: metadata.year ? `${metadata.year}-01-01` : undefined,
+        keywords: metadata.tags.join(", "),
+        inLanguage: "en",
+        author: { "@id": PERSON_ID },
+        publisher: { "@id": PERSON_ID },
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Selected Work",
+            item: `${SITE_URL}/work`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: metadata.title,
+            item: url,
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(schema) }}
+      />
       <CaseStudyPageClient metadata={caseStudy.metadata} related={related}>
         <Content components={caseStudyMDXComponents} />
       </CaseStudyPageClient>

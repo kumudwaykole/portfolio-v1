@@ -1,9 +1,8 @@
 import { Footer } from "@/app/components/footer";
 import { WorkClient } from "@/app/work/WorkClient";
 import { getProjectCards } from "@/content/case-studies";
+import { jsonLd, PERSON_ID, SITE_URL } from "@/lib/seo";
 import type { Metadata } from "next";
-
-const SITE_URL = "https://ikumud.com";
 
 const title = "Selected Work — Full Stack Projects";
 const description =
@@ -84,6 +83,8 @@ export default function WorkPage() {
     name: title,
     description,
     url: `${SITE_URL}/work`,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    author: { "@id": PERSON_ID },
     mainEntity: {
       "@type": "ItemList",
       itemListElement: projects.map((project, index) => ({
@@ -99,7 +100,7 @@ export default function WorkPage() {
     <main>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(itemListSchema) }}
       />
       <WorkClient projects={projects} />
       <Footer />

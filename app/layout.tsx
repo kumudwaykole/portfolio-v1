@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { ALL_SKILLS, JOB_TITLES, jsonLd, PERSON_ID, SITE_NAME, SITE_URL, WEBSITE_ID } from "@/lib/seo";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
@@ -36,8 +37,6 @@ const franie = localFont({
   display: "swap",
 });
 
-const SITE_URL = "https://ikumud.com";
-const SITE_NAME = "Kumud Waykole";
 const TITLE_DEFAULT =
   "Kumud Waykole | Full Stack Software Developer — React, Next.js & Node.js";
 const DESCRIPTION =
@@ -69,6 +68,12 @@ export const metadata: Metadata = {
     "TypeScript Developer",
     "JavaScript Developer",
     "Software Developer",
+    "Software Engineer",
+    "Full Stack Engineer",
+    "Backend Engineer",
+    "Prisma",
+    "Tailwind CSS",
+    "Express.js",
     "Web Application Developer",
     "REST API Development",
     "System Design",
@@ -94,9 +99,6 @@ export const metadata: Metadata = {
     email: false,
     address: false,
     telephone: false,
-  },
-  alternates: {
-    canonical: "/",
   },
   openGraph: {
     type: "website",
@@ -126,28 +128,41 @@ export const metadata: Metadata = {
   },
 };
 
-const PERSON_SCHEMA = {
+const SITE_SCHEMA = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: SITE_NAME,
-  url: SITE_URL,
-  jobTitle: "Full Stack Software Developer",
-  description: DESCRIPTION,
-  image: `${SITE_URL}${OG_IMAGE.url}`,
-  email: "mailto:kumudwaykole1@gmail.com",
-  sameAs: [
-    "https://github.com/kumudwaykole",
-    "https://www.linkedin.com/in/kumud-waykole",
-  ],
-  knowsAbout: [
-    "React",
-    "Next.js",
-    "Node.js",
-    "TypeScript",
-    "JavaScript",
-    "PostgreSQL",
-    "System Design",
-    "Software Architecture",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": WEBSITE_ID,
+      url: SITE_URL,
+      name: SITE_NAME,
+      description: DESCRIPTION,
+      inLanguage: "en",
+      publisher: { "@id": PERSON_ID },
+    },
+    {
+      "@type": "Person",
+      "@id": PERSON_ID,
+      name: SITE_NAME,
+      url: SITE_URL,
+      jobTitle: "Full Stack Software Developer",
+      alternateName: [...JOB_TITLES],
+      description: DESCRIPTION,
+      image: `${SITE_URL}${OG_IMAGE.url}`,
+      email: "mailto:kumudwaykole1@gmail.com",
+      worksFor: { "@type": "Organization", name: "SourceCatch Konnect" },
+      sameAs: [
+        "https://github.com/kumudwaykole",
+        "https://www.linkedin.com/in/kumud-waykole",
+      ],
+      knowsAbout: ALL_SKILLS,
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "Software Engineer",
+        occupationLocation: { "@type": "Country", name: "India" },
+        skills: ALL_SKILLS.join(", "),
+      },
+    },
   ],
 };
 
@@ -164,7 +179,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_SCHEMA) }}
+          dangerouslySetInnerHTML={{ __html: jsonLd(SITE_SCHEMA) }}
         />
         <Script id="cal-embed" strategy="afterInteractive">
           {CAL_EMBED_SCRIPT}
